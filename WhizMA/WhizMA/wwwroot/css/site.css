@@ -69,3 +69,44 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/*Custom Navbar style*/
+
+.navbar-custom {
+    background-color: #245c64;
+}
+
+.navbar-item-custom {
+    font-size: 1.4em;
+}
+.navbar-item-spacing {
+    margin-right: 2%;
+    margin-left: 2%
+}
+
+
+.navbar-hoverline {
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    display: inline-block;
+    position: relative;
+}
+
+    .navbar-hoverline:after {
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: #fff;
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+    }
+
+    .navbar-hoverline:hover:after {
+        width: 100%;
+        left: 0;
+    }
