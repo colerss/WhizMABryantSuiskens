@@ -19,13 +19,13 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1 navbar-item-custom justify-content-md-center justify-content-start" >
+                    <ul class="navbar-nav flex-grow-1 navbar-item-custom justify-content-md-center justify-content-start">
                         <li class="nav-item navbar-item-spacing navbar-hoverline">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Proefles</a>
                         </li>
                         <li class="nav-item dropdown navbar-item-spacing navbar-hoverline">
                             <a class="nav-link text-light dropdown-toggle" href="#" id="resourcesDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Resources
+                                Hulpbronnen
                             </a>
                             <div class="dropdown-menu navbar-custom  " aria-labelledby="resourcesDropDown">
                                 <a class="dropdown-item text-light" asp-area="" asp-controller="Resources" asp-action="Index">Section1</a>
@@ -33,11 +33,14 @@
                                 <a class="dropdown-item text-light" asp-area="" asp-controller="Resources" asp-action="Index">Section3</a>
                             </div>
                         </li>
-                        <li class="nav-item navbar-item-spacing navbar-hoverline">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
-                        </li>
-                        <li class="nav-item navbar-item-spacing navbar-hoverline">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Bundles" asp-action="Privacy">Bundles</a>
+                        <li class="nav-item dropdown navbar-item-spacing navbar-hoverline">
+                            <a class="nav-link text-light dropdown-toggle" href="#" id="lessenDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Lessen
+                            </a>
+                            <div class="dropdown-menu navbar-custom  " aria-labelledby="resourcesDropDown">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Shop" asp-action="Cursussen">Cursussen</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Shop" asp-action="Bundles">Bundels</a>
+                            </div>
                         </li>
                         <li class="nav-item navbar-item-spacing navbar-hoverline">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
