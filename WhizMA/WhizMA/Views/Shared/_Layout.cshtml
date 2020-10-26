@@ -10,7 +10,7 @@
 </head>
 <body>
     <header class="sticky-top">
-        <nav  id="custom-bootstrap-menu" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom box-shadow pb-3  justify-content-between">
+        <nav  id="custom-bootstrap-menu" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom shadow pb-3  justify-content-between">
             <div class="container">
                 <a asp-area="" asp-controller="Home" asp-action="Index"><img width="160" src="/Resources/General/logoWhizFaded.png"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -51,13 +51,13 @@
         </nav>
     </header>
     <div>
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 ">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer  text-muted">
-        <div class="container">
+    <footer class="border-top footer  text-muted shadow-lg mb-0 ">
+        <div class="container mb-0">
             &copy; 2020 - WhizMA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>

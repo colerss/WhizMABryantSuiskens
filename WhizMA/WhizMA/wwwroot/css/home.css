@@ -2,14 +2,24 @@
 
 .section1 {
     background-color: #5dbcd2;
+    padding-top: 4%;
+    padding-bottom: 4%
+}
+.section2 {
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 .section3 {
     background-color: #245c64;
     color: white;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
 .btn-login {
     background-color: #04cc9c;
     color: white;
     font-variant: small-caps;
+    margin: 5px;
+    padding: 3px;
 }
