@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav  id="custom-bootstrap-menu" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom sticky-top border-bottom box-shadow mb-3  justify-content-between">
+        <nav  id="custom-bootstrap-menu" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom sticky-top  box-shadow pb-3  justify-content-between">
             <div class="container">
                 <a asp-area="" asp-controller="Home" asp-action="Index"><img width="160" src="/Resources/General/logoWhizFaded.png"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -50,7 +50,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
