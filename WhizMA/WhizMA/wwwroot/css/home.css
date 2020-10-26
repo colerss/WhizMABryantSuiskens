@@ -3,6 +3,10 @@
 .section1 {
     background-color: #5dbcd2;
 }
+.section3 {
+    background-color: #245c64;
+    color: white;
+}
 
 .btn-login {
     background-color: #04cc9c;
