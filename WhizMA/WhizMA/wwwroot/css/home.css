@@ -15,7 +15,17 @@
     padding-top: 3%;
     padding-bottom: 3%;
 }
-
+.section4 {
+    margin-top: 0%;
+    padding-top: 0%;
+    padding-bottom: 5%;
+}
+.section5 {
+    background-color: #34849c;
+    color: white;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
 .btn-login {
     background-color: #04cc9c;
     color: white;
