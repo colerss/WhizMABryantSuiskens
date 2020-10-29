@@ -1,0 +1,12 @@
+﻿.sectionFaq {
+    background-color: #04cc9c;
+    padding-top: 4%;
+    padding-bottom: 4%
+}
+
+.cardhead::before {
+    content: "\25B8";
+}
+.active::before {
+    content: "\25BE";
+}
