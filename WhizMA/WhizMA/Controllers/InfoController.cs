@@ -6,16 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WhizMA.Controllers
 {
-    public class ResourcesController : Controller
+    public class InfoController : Controller
     {
         public IActionResult FAQ()
         {
             return View();
         }
-        public IActionResult Legal()
-        {
-            return View();
-        }
+       
 
     }
 }

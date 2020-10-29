@@ -4,9 +4,56 @@
     padding-bottom: 4%
 }
 
-.cardhead::before {
+.card {
+    margin: 1%;
+    padding: 1%;
+}
+.collapse {
+    margin: 0px;
+    padding: 0px;
+}
+
+.cardhead{
+    padding: 0;
+    margin: 0;
+}
+
+.quotemark {
+    margin: 0;
+    padding: 0;
+    font-size: 5em;
+    margin-bottom: -0.5em;
+}
+.sectionMid {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.review-card {
+    background: #4cacc4;
+    margin: 1%;
+    padding: 0px;
+    border: 0 !important;
+}
+.review-footer {
+    color: black;
+    background: #ffffff;
+    margin: 0px;
+}
+.sectionReviews {
+    background-color: #245c64;
+    color: white;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.card-body .cardhead::before {
     content: "\25B8";
 }
-.active::before {
+.card-body[aria-expanded=true] .cardhead::before {
     content: "\25BE";
+}
+
+.collapseContent {
+    margin: 3%;
 }

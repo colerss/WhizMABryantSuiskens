@@ -20,18 +20,17 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1 navbar-item-custom justify-content-md-center justify-content-start">
-                        <li class="nav-item navbar-item-spacing navbar-hoverline">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Proefles</a>
-                        </li>
                         <li class="nav-item dropdown navbar-item-spacing navbar-hoverline">
                             <a class="nav-link text-light dropdown-toggle" href="#" id="resourcesDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Hulpbronnen
+                                Proeflessen
                             </a>
                             <div class="dropdown-menu navbar-custom  " aria-labelledby="resourcesDropDown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Resources" asp-action="FAQ">FAQ</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Resources" asp-action="Index">Section2</a>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Resources" asp-action="Index">Section3</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="TrailLesson" asp-action="Strokes">Dunne lijnen zetten</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="TrailLesson" asp-action="Legal">De wet rond facepaint</a>
                             </div>
+                        </li>
+                        <li class="nav-item navbar-item-spacing navbar-hoverline">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Info" asp-action="FAQ">Vragen & Reviews</a>
                         </li>
                         <li class="nav-item dropdown navbar-item-spacing navbar-hoverline">
                             <a class="nav-link text-light dropdown-toggle" href="#" id="lessenDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
