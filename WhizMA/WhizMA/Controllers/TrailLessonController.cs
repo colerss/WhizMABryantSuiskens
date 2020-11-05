@@ -12,5 +12,10 @@ namespace WhizMA.Controllers
         {
             return View();
         }
+        public IActionResult Strokes()
+        {
+            ViewData["vidUrl"] = "https://www.youtube.com/embed/9S-3Uk5-Zsg";
+            return View();
+        }
     }
 }

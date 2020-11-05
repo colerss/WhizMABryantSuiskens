@@ -1,3 +1,20 @@
 ﻿.pageBody {
     font-size: 120%;
 }
+
+.sectionLesson {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background: #245c64;
+    height: 90vh;
+}
+
+
+iframe {
+    display: flex;
+    padding: 1%;
+    width: 80vh;
+    height: 60vh;
+    flex-direction: row;
+}
+
