@@ -9,10 +9,9 @@ namespace WhizMA.Areas.Identity.Data
 {
     public class Account : IdentityUser
     {
+       
         [PersonalData]
-        public string Voornaam { get; set; }
-        [PersonalData]
-        public string Achternaam { get; set; }
+        public string Naam { get; set; }
 
     }
 }

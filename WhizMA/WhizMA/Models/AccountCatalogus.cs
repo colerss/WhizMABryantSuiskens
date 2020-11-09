@@ -15,7 +15,7 @@ namespace WhizMA.Models
 
         public int CursusID { get; set; }
 
-        [ForeignKey("id")]
+        [ForeignKey("Id")]
         public int AccountID { get; set; }
 
 
