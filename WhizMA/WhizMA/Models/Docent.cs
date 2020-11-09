@@ -10,6 +10,7 @@ namespace WhizMA.Models
     {
         [Key]
         public int DocentID { get; set; }
+        [Required]
         public string DocentNaam { get; set; }
         public ICollection<Cursus> Cursussen { get; set; }
     }

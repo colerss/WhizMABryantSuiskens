@@ -10,7 +10,9 @@ namespace WhizMA.Models
     {
         [Key]
         public int BundelID { get; set; }
+        [Required]
         public string Naam { get; set; }
+        [Required]
         public string Afbeelding { get; set; }
         public decimal StandaardPrijs { get; set; }
         public decimal HuidigePrijs { get; set; }

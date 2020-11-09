@@ -10,12 +10,14 @@ namespace WhizMA.Models
     {
         [Key]
         public int LesID { get; set; }
+        [Required]
         public string Naam { get; set; }
         public TimeSpan Duur { get; set; }
+        [Required]
         public string Beschrijving { get; set; }
-
+        [Required]
         public string VideoAddress { get; set; }
 
-        public ICollection<CursusInhoud> CursusInhoud{ get; set; }
+        public ICollection<CursusInhoud> CursusInhouden{ get; set; }
     }
 }

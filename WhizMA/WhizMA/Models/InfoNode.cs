@@ -10,11 +10,12 @@ namespace WhizMA.Models
     {
         [Key]
         public int InfoID { get; set; }
-
+        [Required]
         public string Titel { get; set; }
         public string Subtitel { get; set; }
+        [Required]
         public string beschrijving { get; set; }
-
+        [Required]
         public string afbeelding { get; set; }
         public int CursusID { get; set; }
 
