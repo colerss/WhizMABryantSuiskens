@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WhizMA.Models.Cursus>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StandaardPrijs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HuidigePrijs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beschrijving)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Afbeelding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gecertificieerd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beschikbaarheid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Docent)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StandaardPrijs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HuidigePrijs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Afbeelding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gecertificieerd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beschikbaarheid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Docent.DocentNaam)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CursusID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CursusID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CursusID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

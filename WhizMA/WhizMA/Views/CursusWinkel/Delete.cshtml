@@ -1,0 +1,69 @@
+﻿@model WhizMA.Models.Cursus
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Cursus</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Naam)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StandaardPrijs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StandaardPrijs)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HuidigePrijs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HuidigePrijs)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Beschrijving)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Beschrijving)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Afbeelding)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Afbeelding)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gecertificieerd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gecertificieerd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Beschikbaarheid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Beschikbaarheid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Docent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Docent.DocentNaam)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CursusID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

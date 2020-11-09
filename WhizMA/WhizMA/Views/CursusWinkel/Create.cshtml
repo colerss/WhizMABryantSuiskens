@@ -1,0 +1,67 @@
+﻿@model WhizMA.Models.Cursus
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Cursus</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Naam" class="control-label"></label>
+                <input asp-for="Naam" class="form-control" />
+                <span asp-validation-for="Naam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StandaardPrijs" class="control-label"></label>
+                <input asp-for="StandaardPrijs" class="form-control" />
+                <span asp-validation-for="StandaardPrijs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HuidigePrijs" class="control-label"></label>
+                <input asp-for="HuidigePrijs" class="form-control" />
+                <span asp-validation-for="HuidigePrijs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beschrijving" class="control-label"></label>
+                <input asp-for="Beschrijving" class="form-control" />
+                <span asp-validation-for="Beschrijving" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Afbeelding" class="control-label"></label>
+                <input asp-for="Afbeelding" class="form-control" />
+                <span asp-validation-for="Afbeelding" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Gecertificieerd" /> @Html.DisplayNameFor(model => model.Gecertificieerd)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beschikbaarheid" class="control-label"></label>
+                <input asp-for="Beschikbaarheid" class="form-control" />
+                <span asp-validation-for="Beschikbaarheid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocentID" class="control-label"></label>
+                <select asp-for="DocentID" class ="form-control" asp-items="ViewBag.DocentID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

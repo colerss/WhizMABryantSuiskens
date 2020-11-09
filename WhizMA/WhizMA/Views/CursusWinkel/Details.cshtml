@@ -1,0 +1,66 @@
+﻿@model WhizMA.Models.Cursus
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Cursus</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Naam)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StandaardPrijs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StandaardPrijs)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HuidigePrijs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HuidigePrijs)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Beschrijving)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Beschrijving)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Afbeelding)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Afbeelding)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gecertificieerd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gecertificieerd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Beschikbaarheid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Beschikbaarheid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Docent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Docent.DocentNaam)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CursusID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
