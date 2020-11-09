@@ -10,7 +10,7 @@ using WhizMA.Data;
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    [Migration("20201109134608_Initial-Create")]
+    [Migration("20201109153051_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -230,9 +230,6 @@ namespace WhizMA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountID")
-                        .HasColumnType("int");
 
                     b.Property<string>("AccountId")
                         .HasColumnType("nvarchar(450)");

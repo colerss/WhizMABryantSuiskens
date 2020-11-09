@@ -231,7 +231,6 @@ namespace WhizMA.Migrations
                     CatalogusItemID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CursusID = table.Column<int>(nullable: false),
-                    AccountID = table.Column<int>(nullable: false),
                     VerloopTijd = table.Column<DateTime>(nullable: false),
                     Voortgang = table.Column<int>(nullable: false),
                     AccountId = table.Column<string>(nullable: true)

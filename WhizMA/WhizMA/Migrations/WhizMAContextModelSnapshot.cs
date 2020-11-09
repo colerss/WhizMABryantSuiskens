@@ -229,9 +229,6 @@ namespace WhizMA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccountID")
-                        .HasColumnType("int");
-
                     b.Property<string>("AccountId")
                         .HasColumnType("nvarchar(450)");
 

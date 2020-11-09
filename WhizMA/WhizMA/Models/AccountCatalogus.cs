@@ -15,9 +15,6 @@ namespace WhizMA.Models
 
         public int CursusID { get; set; }
 
-        [ForeignKey("Id")]
-        public int AccountID { get; set; }
-
 
         [DataType(DataType.Date)]
         public DateTime VerloopTijd { get; set; }
