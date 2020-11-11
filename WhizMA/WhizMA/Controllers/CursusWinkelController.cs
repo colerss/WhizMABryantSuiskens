@@ -25,6 +25,13 @@ namespace WhizMA.Controllers
             var whizMAContext = _context.Cursussen.Include(c => c.Docent);
             return View(await whizMAContext.ToListAsync());
         }
+        public async Task<IActionResult> Catalogus()
+        {
+            var whizMAContext = _context.Cursussen
+                .Include(c => c.Docent)
+                .Include(c => c.CursusInhoud);
+            return View(await whizMAContext.ToListAsync());
+        }
 
         // GET: CursusWinkel/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -44,6 +51,27 @@ namespace WhizMA.Controllers
 
             return View(cursus);
         }
+        public async Task<IActionResult> Cursus(int? id )
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cursus = await _context.Cursussen
+                .Include(c => c.Docent)
+                .Include(c => c.InfoNodes)
+                .Include(c => c.CursusInhoud)
+                .FirstOrDefaultAsync(m => m.CursusID == id);
+            if (cursus == null)
+            {
+                return NotFound();
+            }
+            
+            
+
+            return View(cursus);
+        }
 
         // GET: CursusWinkel/Create
         public IActionResult Create()
@@ -57,7 +85,7 @@ namespace WhizMA.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CursusID,Naam,StandaardPrijs,HuidigePrijs,Beschrijving,Afbeelding,Gecertificieerd,Beschikbaarheid,DocentID")] Cursus cursus)
+        public async Task<IActionResult> Create([Bind("CursusID,Naam,StandaardPrijs,HuidigePrijs,Beschrijving,Afbeelding,Gecertificieerd,BeschikbaarheidInMaanden,DocentID")] Cursus cursus)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +119,7 @@ namespace WhizMA.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CursusID,Naam,StandaardPrijs,HuidigePrijs,Beschrijving,Afbeelding,Gecertificieerd,Beschikbaarheid,DocentID")] Cursus cursus)
+        public async Task<IActionResult> Edit(int id, [Bind("CursusID,Naam,StandaardPrijs,HuidigePrijs,Beschrijving,Afbeelding,Gecertificieerd,BeschikbaarheidInMaanden,DocentID")] Cursus cursus)
         {
             if (id != cursus.CursusID)
             {

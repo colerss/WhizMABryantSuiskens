@@ -311,7 +311,7 @@ namespace WhizMA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<TimeSpan>("Beschikbaarheid")
+                    b.Property<TimeSpan>("BeschikbaarheidInMaanden")
                         .HasColumnType("time");
 
                     b.Property<string>("Beschrijving")

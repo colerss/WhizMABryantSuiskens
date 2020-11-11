@@ -7,6 +7,7 @@ namespace WhizMA.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -46,6 +47,7 @@ namespace WhizMA.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
+ 
 
             migrationBuilder.CreateTable(
                 name: "Bundels",
@@ -91,7 +93,7 @@ namespace WhizMA.Migrations
                 {
                     table.PrimaryKey("PK_Lessen", x => x.LesID);
                 });
-
+         
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
@@ -454,7 +456,7 @@ namespace WhizMA.Migrations
                 name: "Cursussen");
 
             migrationBuilder.DropTable(
-                name: "Docenten");
+                name: "Docenten");*/
         }
     }
 }

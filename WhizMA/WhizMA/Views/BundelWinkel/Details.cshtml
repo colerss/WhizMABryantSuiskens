@@ -1,0 +1,42 @@
+﻿@model WhizMA.Models.Bundel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Bundel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Naam)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Afbeelding)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Afbeelding)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StandaardPrijs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StandaardPrijs)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HuidigePrijs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HuidigePrijs)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BundelID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

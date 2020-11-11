@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhizMA.Data;
 
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    partial class WhizMAContextModelSnapshot : ModelSnapshot
+    [Migration("20201111205638_DateTimeFix")]
+    partial class DateTimeFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -496,7 +498,7 @@ namespace WhizMA.Migrations
             modelBuilder.Entity("WhizMA.Models.AccountCatalogus", b =>
                 {
                     b.HasOne("WhizMA.Areas.Identity.Data.Account", "Account")
-                        .WithMany("AccountCatalogus")
+                        .WithMany()
                         .HasForeignKey("AccountId");
 
                     b.HasOne("WhizMA.Models.Cursus", "Cursus")

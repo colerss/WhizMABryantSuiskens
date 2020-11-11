@@ -41,6 +41,14 @@ namespace WhizMA.Data
             modelBuilder.Entity<BundelInhoud>().ToTable("BundelInhoud");
             modelBuilder.Entity<AccountCatalogus>().ToTable("AccountCatalogus");
 
+            modelBuilder.Entity<AccountCatalogus>().HasOne(b => b.Account).WithMany(bc => bc.AccountCatalogus);
+            modelBuilder.Entity<AccountCatalogus>().HasOne(b => b.Cursus).WithMany(bc => bc.AccountCatalogus);
+
+            modelBuilder.Entity<CursusInhoud>().HasOne(b => b.Les).WithMany(bc => bc.CursusInhouden);
+            modelBuilder.Entity<CursusInhoud>().HasOne(b => b.Cursus).WithMany(bc => bc.CursusInhoud);
+            modelBuilder.Entity<BundelInhoud>().HasOne(b => b.Cursus).WithMany(bc => bc.BundelInhoud);
+            modelBuilder.Entity<BundelInhoud>().HasOne(b => b.Bundel).WithMany(bc => bc.BundelInhoud);
+
             modelBuilder.Entity<Bundel>().Property(p => p.HuidigePrijs).HasColumnType("decimal(18,2)");
             modelBuilder.Entity<Bundel>().Property(p => p.StandaardPrijs).HasColumnType("decimal(18,2)");
             modelBuilder.Entity<Cursus>().Property(p => p.HuidigePrijs).HasColumnType("decimal(18,2)");

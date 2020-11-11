@@ -19,7 +19,7 @@ namespace WhizMA.Models
         [Required]
         public string Afbeelding { get; set; }
         public bool Gecertificieerd { get; set; }
-        public TimeSpan Beschikbaarheid { get; set; }
+        public int BeschikbaarheidInMaanden { get; set; }
         public int DocentID { get; set; }
 
 
