@@ -19,5 +19,6 @@ namespace WhizMA.Models
         public string VideoAddress { get; set; }
 
         public ICollection<CursusInhoud> CursusInhouden{ get; set; }
+        public ICollection<LesStap> LesStappen { get; set; }
     }
 }

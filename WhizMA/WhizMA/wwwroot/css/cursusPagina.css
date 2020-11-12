@@ -1,0 +1,38 @@
+﻿body {
+    /* Margin bottom by footer height */
+    margin-bottom: 70px;
+}
+
+.sectionHeader {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    color: white;
+    padding-top: 2% !important;
+    padding-bottom: 2% !important;
+     /*Important tags zijn hier toegevoegd omdat anders het word overschreden door de style injectie*/
+}
+.sectionLessons {
+    padding-top: 2% ;
+    padding-bottom: 2% ;
+    background-color: lightgrey;
+}
+.sectionInfoNodes {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: rgba(93, 188, 210, 1);
+}
+.sectionDocent {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: #34849c;
+}
+
+
+.mainPrice {
+    font-size: 1.2em;
+}
+
+.secondaryPrice {
+    font-size: 0.9em;
+}

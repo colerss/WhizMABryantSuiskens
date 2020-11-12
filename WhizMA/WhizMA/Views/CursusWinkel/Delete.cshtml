@@ -30,12 +30,6 @@
             @Html.DisplayFor(model => model.HuidigePrijs)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CursusBeschrijving.InhoudBeschrijving)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CursusBeschrijving.InhoudBeschrijving)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Afbeelding)
         </dt>
         <dd class = "col-sm-10">
@@ -53,6 +47,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.BeschikbaarheidInMaanden)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CursusBeschrijving)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CursusBeschrijving.CursusBeschrijvingID)
+        </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Docent)
         </dt>

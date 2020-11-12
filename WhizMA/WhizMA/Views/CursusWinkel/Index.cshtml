@@ -22,9 +22,6 @@
                 @Html.DisplayNameFor(model => model.HuidigePrijs)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CursusBeschrijving.InhoudBeschrijving)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Afbeelding)
             </th>
             <th>
@@ -32,6 +29,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BeschikbaarheidInMaanden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CursusBeschrijving)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Docent)
@@ -52,9 +52,6 @@
                 @Html.DisplayFor(modelItem => item.HuidigePrijs)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CursusBeschrijving.InhoudBeschrijving)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Afbeelding)
             </td>
             <td>
@@ -62,6 +59,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BeschikbaarheidInMaanden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CursusBeschrijving.CursusBeschrijvingID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Docent.DocentNaam)

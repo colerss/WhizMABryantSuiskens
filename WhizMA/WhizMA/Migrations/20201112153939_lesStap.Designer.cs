@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhizMA.Data;
 
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    partial class WhizMAContextModelSnapshot : ModelSnapshot
+    [Migration("20201112153939_lesStap")]
+    partial class lesStap
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -510,9 +512,6 @@ namespace WhizMA.Migrations
 
                     b.Property<int>("LesStapNaam")
                         .HasColumnType("int");
-
-                    b.Property<string>("LesStapText")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StapIcon")
                         .HasColumnType("nvarchar(max)");

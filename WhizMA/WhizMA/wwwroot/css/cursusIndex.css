@@ -31,7 +31,6 @@
 }
 
 .mainPrice {
-    font-size: 1.2em;
     color: darkred;
 }
 .secondaryPrice {
@@ -39,20 +38,29 @@
 }
 
 .sectionHeader {
-    background-color: #5dbcd2;
+    background-image: linear-gradient( rgba(93, 188, 210, 0.8), rgba(93, 188, 210, 0.8) ), url(../Resources/General/WhizBackground.jpeg);
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: contain;
     color: white;
-    padding-top: 3%;
-    padding-bottom: 3%;
+    padding-top: 4%;
+    padding-bottom: 4%;
 }
 .sectionCatalogue {
     background-color: white;
     color: white;
-    padding-top: 3%;
-    padding-bottom: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.sectionSearchbar {
+    background-color: #17a2b8;
+    color: white;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 
 body {
     /* Margin bottom by footer height */
     margin-bottom: 70px;
-    background-color: #5dbcd2;
 }

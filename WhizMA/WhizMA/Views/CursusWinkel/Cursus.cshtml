@@ -1,5 +1,88 @@
 ﻿@model WhizMA.Models.Cursus
 
 @{
-    ViewData["Title"] =  Model.Naam;
+    ViewData["Title"] = Model.Naam;
 }
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="~/css/cursusPagina.css" rel="stylesheet" type="text/css" />
+
+<div class="sectionHeader" style=
+     "  background: linear-gradient( rgba(93, 188, 210, 0.8), rgba(93, 188, 210, 0.8) ), url( @Model.Afbeelding );
+  
+"><!--Style is hier inline gedefinieerd om toe te laten dat de achtergrond image op een invoudige manier er in gezet word-->
+    <div class="container align-content-center text-center">
+        <h1 >@Model.Naam</h1>
+        <p>@Model.CursusBeschrijving.InhoudBeschrijving</p>
+        <h2>Voor wie is deze opleiding?</h2>
+        <p>DBNogNietKlaar</p>
+        <h2 >Certificieëring</h2>
+        <p>@Model.CursusBeschrijving.CertificaatBeschrijving</p>
+        <h2 >Betalingsmogelijkheden</h2>
+        <p>De prijs hieronder is exclusief BTW en exclusief kosten van Paypal. 
+        Om de paypalkosten te vermijden kunt u een mailtje schrijven naar info@whiz-ma.eu ,
+        dan zoeken we een alternatieve manier van betalen en zet ik u handmatig in de cursus. 
+        Hiervoor moet u wel even een inlog aanmaken, dan kan ik u vinden in het systeem. 
+        De prijs hieronder is exclusief BTW en exclusief kosten van Paypal. Om de paypalkosten te vermijden kunt u een mailtje schrijven naar info@whiz-ma.eu 
+        , dan zoeken we een alternatieve manier van betalen en zet ik u handmatig in de cursus. Hiervoor moet u wel even een inlog aanmaken, 
+        dan kan ik u vinden in het systeem. </p>
+        <div class="text-center">
+            <button type="button" class="btn btn-danger">
+                Start
+                @if (Model.StandaardPrijs == Model.HuidigePrijs)
+                {
+                    <span class="mainPrice">@Model.HuidigePrijs.ToString("N0")</span>
+                }
+                else
+                {
+                    <span class="text-muted secondaryPrice">
+                        <s> €@Model.StandaardPrijs.ToString("N0")</s>
+                    </span>
+                    <span class="mainPrice">   €@Model.HuidigePrijs.ToString("N0")</span>
+                }
+            </button>
+        </div>
+    </div>
+</div>
+<div class="sectionBetween">
+    <div class="container"></div>
+</div>
+<div class="sectionLessons">
+    <div class="container">
+        <div id="accordion">
+
+            @foreach (var item in Model.CursusInhoud)
+            {
+            <div class="card">
+                <div class="card-header" id="@item.Les.Naam">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="@item.Positie" aria-expanded="true" aria-controls="collapseOne">
+                            @item.Les.Naam
+                        </button>
+                    </h5>
+                </div>
+                <div id="@item.Positie" class="collapse show" aria-labelledby="@item.Les.Naam " data-parent="#accordion">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit
+                    </div>
+                </div>
+            </div>
+
+                }
+            </div>
+    </div>
+</div>
+<div class="sectionInfoNodes">
+    <div class="container">
+        @foreach (var item in Model.CursusBeschrijving.InfoNodes)
+        {
+
+        }
+    </div>
+</div>
+<div class="sectionDocent">
+    <div class="container">
+
+    </div>
+</div>

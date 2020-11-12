@@ -1,69 +1,72 @@
-﻿@model WhizMA.Models.Cursus
+﻿@model WhizMA.ViewModels.CursusCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<div class="container">
-<h1>Create</h1>
+    <div class="container">
+        <h1>Create</h1>
 
-<h4>Cursus</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Naam" class="control-label"></label>
-                <input asp-for="Naam" class="form-control" />
-                <span asp-validation-for="Naam" class="text-danger"></span>
+        <h4>Cursus</h4>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Cursus.Naam" class="control-label"></label>
+                        <input asp-for="Cursus.Naam" class="form-control" />
+                        <span asp-validation-for="Cursus.Naam" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cursus.StandaardPrijs" class="control-label"></label>
+                        <input asp-for="Cursus.StandaardPrijs" class="form-control" />
+                        <span asp-validation-for="Cursus.StandaardPrijs" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cursus.HuidigePrijs" class="control-label"></label>
+                        <input asp-for="Cursus.HuidigePrijs" class="form-control" />
+                        <span asp-validation-for="Cursus.HuidigePrijs" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CursusBeschrijving.InhoudBeschrijving" class="control-label"></label>
+                        <textarea asp-for="CursusBeschrijving.InhoudBeschrijving" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CursusBeschrijving.CertificaatBeschrijving" class="control-label"></label>
+                        <textarea asp-for="CursusBeschrijving.CertificaatBeschrijving" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cursus.Afbeelding" class="control-label"></label>
+                        <input asp-for="Cursus.Afbeelding" class="form-control" />
+                        <span asp-validation-for="Cursus.Afbeelding" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Cursus.Gecertificieerd" /> @Html.DisplayNameFor(model => model.Cursus.Gecertificieerd)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cursus.BeschikbaarheidInMaanden" class="control-label"></label>
+                        <input asp-for="Cursus.BeschikbaarheidInMaanden" class="form-control" />
+                        <span asp-validation-for="Cursus.BeschikbaarheidInMaanden" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cursus.DocentID" class="control-label"></label>
+                        <select asp-for="Cursus.DocentID" class="form-control" asp-items="ViewBag.DocentID"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="StandaardPrijs" class="control-label"></label>
-                <input asp-for="StandaardPrijs" class="form-control" />
-                <span asp-validation-for="StandaardPrijs" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HuidigePrijs" class="control-label"></label>
-                <input asp-for="HuidigePrijs" class="form-control" />
-                <span asp-validation-for="HuidigePrijs" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CursusBeschrijving.InhoudBeschrijving" class="control-label"></label>
-                <textarea asp-for="CursusBeschrijving.InhoudBeschrijving" class="form-control" rows="50"></textarea>
-                <span asp-validation-for="CursusBeschrijving.InhoudBeschrijving" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Afbeelding" class="control-label"></label>
-                <input asp-for="Afbeelding" class="form-control" />
-                <span asp-validation-for="Afbeelding" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Gecertificieerd" /> @Html.DisplayNameFor(model => model.Gecertificieerd)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="BeschikbaarheidInMaanden" class="control-label"></label>
-                <input asp-for="BeschikbaarheidInMaanden" class="form-control" />
-                <span asp-validation-for="BeschikbaarheidInMaanden" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DocentID" class="control-label"></label>
-                <select asp-for="DocentID" class="form-control" asp-items="ViewBag.DocentID"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
     </div>
-</div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

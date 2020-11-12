@@ -10,24 +10,42 @@
 
 <div class="sectionHeader">
     <div class="container">
-            <div>
-                <h1 class=" text-center">Cursus Overzicht</h1>
+        <div>
+            <h1 class=" text-center">Cursus Overzicht</h1>
+        </div>
+        <div>
+            <hr class="w-25 text-center" />
+        </div>
+        <div>
+            <h3 class=" text-center">Neem in kijkje in all onze cursussen</h3>
+        </div>
+    </div>
+</div>
+<div class="sectionSearchbar">
+    <div class="container">
+        <div class="btn-toolbar justify-content-center" role="toolbar">
+            <div class="btn-group mr-2 btn-group-toggle" data-toggle="buttons" role="group">
+                <label class="btn active btn-info">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Alle Cursussen
+                </label>
+                <label class="btn btn-info">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> Nieuw
+                </label>
+                <label class="btn btn-info">
+                    <input type="radio" name="options" id="option3" autocomplete="off"> Populair
+                </label>
             </div>
-            <div>
-                <hr />
+            <div class="btn-group mr-2" role="group">
+                <select class="form-control" asp-items="ViewBag.DocentID"></select>
             </div>
-            <div>
-                <h3 class=" text-center">Neem in kijkje in all onze cursussen</h3>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Wat wil je leren?" />
             </div>
+        </div>
     </div>
 </div>
 <div class="sectionCatalogue">
     <div class="container">
-
-
-        <p>
-            <a asp-action="Create">Create New</a>
-        </p>
         <div class="row d-flex">
             @foreach (var item in Model.Cursussen)
             {

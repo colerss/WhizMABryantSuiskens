@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhizMA.Data;
 
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    partial class WhizMAContextModelSnapshot : ModelSnapshot
+    [Migration("20201112144644_StandaardTabellenupgedated")]
+    partial class StandaardTabellenupgedated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -489,6 +491,9 @@ namespace WhizMA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Stappen")
+                        .HasColumnType("int");
+
                     b.Property<string>("VideoAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -496,35 +501,6 @@ namespace WhizMA.Migrations
                     b.HasKey("LesID");
 
                     b.ToTable("Lessen");
-                });
-
-            modelBuilder.Entity("WhizMA.Models.LesStap", b =>
-                {
-                    b.Property<int>("LesStapID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("LesID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LesStapNaam")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LesStapText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StapIcon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("StapTimeStamp")
-                        .HasColumnType("time");
-
-                    b.HasKey("LesStapID");
-
-                    b.HasIndex("LesID");
-
-                    b.ToTable("LesStap");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -650,15 +626,6 @@ namespace WhizMA.Migrations
                     b.HasOne("WhizMA.Models.CursusBeschrijving", "CursusBeschrijving")
                         .WithMany("InfoNodes")
                         .HasForeignKey("CursusBeschrijvingID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WhizMA.Models.LesStap", b =>
-                {
-                    b.HasOne("WhizMA.Models.Les", "Les")
-                        .WithMany("LesStappen")
-                        .HasForeignKey("LesID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
