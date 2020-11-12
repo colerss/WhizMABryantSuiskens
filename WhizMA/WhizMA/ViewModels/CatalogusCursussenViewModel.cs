@@ -10,5 +10,10 @@ namespace WhizMA.ViewModels
     {
         public string CursusSearch { get; set; }
         public List<Cursus> Cursussen { get; set; }
+
+        public string CursusPrijs(decimal prijs)
+        {
+            return "€" + Math.Floor(prijs);
+        }
     }
 }

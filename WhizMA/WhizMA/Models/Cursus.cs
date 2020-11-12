@@ -14,8 +14,9 @@ namespace WhizMA.Models
         public string Naam { get; set; }
         public decimal StandaardPrijs { get; set; }
         public decimal HuidigePrijs { get; set; }
+ 
         [Required]
-        public string Beschrijving { get; set; }
+        public int CursusBeschrijvingID { get; set; }
         [Required]
         public string Afbeelding { get; set; }
         public bool Gecertificieerd { get; set; }
@@ -23,10 +24,10 @@ namespace WhizMA.Models
         public int DocentID { get; set; }
 
 
-
+        public CursusBeschrijving CursusBeschrijving { get; set; }
         public Docent Docent { get; set; }
         public ICollection<CursusInhoud> CursusInhoud { get; set; }
-        public ICollection<InfoNode> InfoNodes { get; set; }
+       
         public ICollection<BundelInhoud> BundelInhoud { get; set; }
         public ICollection<AccountCatalogus> AccountCatalogus { get; set; }
     }

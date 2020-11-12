@@ -12,6 +12,8 @@ namespace WhizMA.Models
         public int DocentID { get; set; }
         [Required]
         public string DocentNaam { get; set; }
+
+        public int DocentBeschrijvingID { get; set; }
         public ICollection<Cursus> Cursussen { get; set; }
     }
 }

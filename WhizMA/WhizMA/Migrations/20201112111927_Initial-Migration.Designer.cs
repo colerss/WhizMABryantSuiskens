@@ -10,8 +10,8 @@ using WhizMA.Data;
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    [Migration("20201111205638_DateTimeFix")]
-    partial class DateTimeFix
+    [Migration("20201112111927_Initial-Migration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -314,9 +314,8 @@ namespace WhizMA.Migrations
                     b.Property<int>("BeschikbaarheidInMaanden")
                         .HasColumnType("int");
 
-                    b.Property<string>("Beschrijving")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CursusBeschrijvingID")
+                        .HasColumnType("int");
 
                     b.Property<int>("DocentID")
                         .HasColumnType("int");
@@ -336,9 +335,30 @@ namespace WhizMA.Migrations
 
                     b.HasKey("CursusID");
 
+                    b.HasIndex("CursusBeschrijvingID")
+                        .IsUnique();
+
                     b.HasIndex("DocentID");
 
                     b.ToTable("Cursussen");
+                });
+
+            modelBuilder.Entity("WhizMA.Models.CursusBeschrijving", b =>
+                {
+                    b.Property<int>("CursusBeschrijvingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CertificaatBeschrijving")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InhoudBeschrijving")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CursusBeschrijvingID");
+
+                    b.ToTable("CursusBeschrijving");
                 });
 
             modelBuilder.Entity("WhizMA.Models.CursusInhoud", b =>
@@ -392,7 +412,7 @@ namespace WhizMA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CursusID")
+                    b.Property<int>("CursusBeschrijvingID")
                         .HasColumnType("int");
 
                     b.Property<string>("Subtitel")
@@ -412,7 +432,7 @@ namespace WhizMA.Migrations
 
                     b.HasKey("InfoID");
 
-                    b.HasIndex("CursusID");
+                    b.HasIndex("CursusBeschrijvingID");
 
                     b.ToTable("InfoNodes");
                 });
@@ -498,7 +518,7 @@ namespace WhizMA.Migrations
             modelBuilder.Entity("WhizMA.Models.AccountCatalogus", b =>
                 {
                     b.HasOne("WhizMA.Areas.Identity.Data.Account", "Account")
-                        .WithMany()
+                        .WithMany("AccountCatalogus")
                         .HasForeignKey("AccountId");
 
                     b.HasOne("WhizMA.Models.Cursus", "Cursus")
@@ -525,6 +545,12 @@ namespace WhizMA.Migrations
 
             modelBuilder.Entity("WhizMA.Models.Cursus", b =>
                 {
+                    b.HasOne("WhizMA.Models.CursusBeschrijving", "CursusBeschrijving")
+                        .WithOne("Cursus")
+                        .HasForeignKey("WhizMA.Models.Cursus", "CursusBeschrijvingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WhizMA.Models.Docent", "Docent")
                         .WithMany("Cursussen")
                         .HasForeignKey("DocentID")
@@ -549,9 +575,9 @@ namespace WhizMA.Migrations
 
             modelBuilder.Entity("WhizMA.Models.InfoNode", b =>
                 {
-                    b.HasOne("WhizMA.Models.Cursus", "Cursus")
+                    b.HasOne("WhizMA.Models.CursusBeschrijving", "CursusBeschrijving")
                         .WithMany("InfoNodes")
-                        .HasForeignKey("CursusID")
+                        .HasForeignKey("CursusBeschrijvingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

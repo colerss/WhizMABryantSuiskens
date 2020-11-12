@@ -3,11 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WhizMA.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            /*
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -47,7 +46,6 @@ namespace WhizMA.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
- 
 
             migrationBuilder.CreateTable(
                 name: "Bundels",
@@ -63,6 +61,20 @@ namespace WhizMA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bundels", x => x.BundelID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CursusBeschrijving",
+                columns: table => new
+                {
+                    CursusBeschrijvingID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InhoudBeschrijving = table.Column<string>(nullable: true),
+                    CertificaatBeschrijving = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CursusBeschrijving", x => x.CursusBeschrijvingID);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,7 +105,7 @@ namespace WhizMA.Migrations
                 {
                     table.PrimaryKey("PK_Lessen", x => x.LesID);
                 });
-         
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
@@ -201,6 +213,29 @@ namespace WhizMA.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InfoNodes",
+                columns: table => new
+                {
+                    InfoID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Titel = table.Column<string>(nullable: false),
+                    Subtitel = table.Column<string>(nullable: true),
+                    beschrijving = table.Column<string>(nullable: false),
+                    afbeelding = table.Column<string>(nullable: false),
+                    CursusBeschrijvingID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InfoNodes", x => x.InfoID);
+                    table.ForeignKey(
+                        name: "FK_InfoNodes_CursusBeschrijving_CursusBeschrijvingID",
+                        column: x => x.CursusBeschrijvingID,
+                        principalTable: "CursusBeschrijving",
+                        principalColumn: "CursusBeschrijvingID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cursussen",
                 columns: table => new
                 {
@@ -209,15 +244,21 @@ namespace WhizMA.Migrations
                     Naam = table.Column<string>(nullable: false),
                     StandaardPrijs = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     HuidigePrijs = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Beschrijving = table.Column<string>(nullable: false),
+                    CursusBeschrijvingID = table.Column<int>(nullable: false),
                     Afbeelding = table.Column<string>(nullable: false),
                     Gecertificieerd = table.Column<bool>(nullable: false),
-                    Beschikbaarheid = table.Column<TimeSpan>(nullable: false),
+                    BeschikbaarheidInMaanden = table.Column<int>(nullable: false),
                     DocentID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cursussen", x => x.CursusID);
+                    table.ForeignKey(
+                        name: "FK_Cursussen_CursusBeschrijving_CursusBeschrijvingID",
+                        column: x => x.CursusBeschrijvingID,
+                        principalTable: "CursusBeschrijving",
+                        principalColumn: "CursusBeschrijvingID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cursussen_Docenten_DocentID",
                         column: x => x.DocentID,
@@ -308,29 +349,6 @@ namespace WhizMA.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "InfoNodes",
-                columns: table => new
-                {
-                    InfoID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Titel = table.Column<string>(nullable: false),
-                    Subtitel = table.Column<string>(nullable: true),
-                    beschrijving = table.Column<string>(nullable: false),
-                    afbeelding = table.Column<string>(nullable: false),
-                    CursusID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InfoNodes", x => x.InfoID);
-                    table.ForeignKey(
-                        name: "FK_InfoNodes_Cursussen_CursusID",
-                        column: x => x.CursusID,
-                        principalTable: "Cursussen",
-                        principalColumn: "CursusID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AccountCatalogus_AccountId",
                 table: "AccountCatalogus",
@@ -401,14 +419,20 @@ namespace WhizMA.Migrations
                 column: "LesID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cursussen_CursusBeschrijvingID",
+                table: "Cursussen",
+                column: "CursusBeschrijvingID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cursussen_DocentID",
                 table: "Cursussen",
                 column: "DocentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InfoNodes_CursusID",
+                name: "IX_InfoNodes_CursusBeschrijvingID",
                 table: "InfoNodes",
-                column: "CursusID");
+                column: "CursusBeschrijvingID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -450,13 +474,16 @@ namespace WhizMA.Migrations
                 name: "Bundels");
 
             migrationBuilder.DropTable(
-                name: "Lessen");
-
-            migrationBuilder.DropTable(
                 name: "Cursussen");
 
             migrationBuilder.DropTable(
-                name: "Docenten");*/
+                name: "Lessen");
+
+            migrationBuilder.DropTable(
+                name: "CursusBeschrijving");
+
+            migrationBuilder.DropTable(
+                name: "Docenten");
         }
     }
 }

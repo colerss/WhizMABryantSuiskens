@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WhizMA.Models.Cursus>
+﻿@model WhizMA.ViewModels.CatalogusCursussenViewModel
 
 @{
     ViewData["Title"] = "Catalogus";
@@ -8,44 +8,61 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link href="~/css/cursusIndex.css" rel="stylesheet" type="text/css" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
-<div class="container">
-    <div class="row d-flex">
-        @foreach (var item in Model)
-        {
-            <div class="col-sm-6 col-lg-3  my-3">
-                <a class="btn" asp-action="Cursus"  asp-route-id="@item.CursusID">
-                    <div class="card border-dark customCard">
-                        <img class="card-img-top" src="@item.Afbeelding" alt="@item.Naam">
-                        <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Naam)</h5>
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.Beschrijving)</p>
-
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <p>
-                                    Kosten <br />
-                                    @if (item.StandaardPrijs == item.HuidigePrijs)
-                                    {
-                                        <span> @Html.DisplayFor(modelItem => item.HuidigePrijs)</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="text-muted">
-                                            <s> @Html.DisplayFor(modelItem => item.StandaardPrijs)</s>
-                                        </span>
-                                        <span>    @Html.DisplayFor(modelItem => item.HuidigePrijs)</span>
-                                    }
-                                </p> </li>
-                        </ul>
-                    </div>
-
-                </a>
+<div class="sectionHeader">
+    <div class="container">
+            <div>
+                <h1 class=" text-center">Cursus Overzicht</h1>
             </div>
-        }
+            <div>
+                <hr />
+            </div>
+            <div>
+                <h3 class=" text-center">Neem in kijkje in all onze cursussen</h3>
+            </div>
+    </div>
+</div>
+<div class="sectionCatalogue">
+    <div class="container">
+
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <div class="row d-flex">
+            @foreach (var item in Model.Cursussen)
+            {
+                <div class="col-sm-6 col-lg-3  my-3">
+                    <a class="btn" asp-action="Cursus" asp-route-id="@item.CursusID">
+                        <div class="card border-dark customCard">
+                            <img class="card-img-top" src="@item.Afbeelding" alt="@item.Naam">
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Naam)</h5>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.CursusBeschrijving.InhoudBeschrijving)</p>
+
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <p>
+                                        Kosten <br />
+                                        @if (item.StandaardPrijs == item.HuidigePrijs)
+                                        {
+                                            <span class="mainPrice">@Model.CursusPrijs(item.HuidigePrijs)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted secondaryPrice">
+                                                <s> @Model.CursusPrijs(item.StandaardPrijs)</s>
+                                            </span>
+                                            <span class="mainPrice">    @Model.CursusPrijs(item.HuidigePrijs)</span>
+                                        }
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </a>
+                </div>
+            }
+        </div>
     </div>
 </div>

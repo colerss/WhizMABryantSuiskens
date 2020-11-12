@@ -17,10 +17,10 @@ namespace WhizMA.Models
         public string beschrijving { get; set; }
         [Required]
         public string afbeelding { get; set; }
-        public int CursusID { get; set; }
+        public int CursusBeschrijvingID { get; set; }
 
         //navprops
 
-        public Cursus Cursus { get; set; }
+        public CursusBeschrijving CursusBeschrijving { get; set; }
     }
 }

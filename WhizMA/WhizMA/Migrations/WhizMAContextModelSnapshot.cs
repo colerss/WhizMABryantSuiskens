@@ -261,6 +261,9 @@ namespace WhizMA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BundelBeschrijvingID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("HuidigePrijs")
                         .HasColumnType("decimal(18,2)");
 
@@ -273,7 +276,25 @@ namespace WhizMA.Migrations
 
                     b.HasKey("BundelID");
 
+                    b.HasIndex("BundelBeschrijvingID")
+                        .IsUnique();
+
                     b.ToTable("Bundels");
+                });
+
+            modelBuilder.Entity("WhizMA.Models.BundelBeschrijving", b =>
+                {
+                    b.Property<int>("BundelBeschrijvingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BundelInhoudsBeschrijving")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BundelBeschrijvingID");
+
+                    b.ToTable("BundelBeschrijving");
                 });
 
             modelBuilder.Entity("WhizMA.Models.BundelInhoud", b =>
@@ -312,9 +333,8 @@ namespace WhizMA.Migrations
                     b.Property<int>("BeschikbaarheidInMaanden")
                         .HasColumnType("int");
 
-                    b.Property<string>("Beschrijving")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CursusBeschrijvingID")
+                        .HasColumnType("int");
 
                     b.Property<int>("DocentID")
                         .HasColumnType("int");
@@ -334,9 +354,30 @@ namespace WhizMA.Migrations
 
                     b.HasKey("CursusID");
 
+                    b.HasIndex("CursusBeschrijvingID")
+                        .IsUnique();
+
                     b.HasIndex("DocentID");
 
                     b.ToTable("Cursussen");
+                });
+
+            modelBuilder.Entity("WhizMA.Models.CursusBeschrijving", b =>
+                {
+                    b.Property<int>("CursusBeschrijvingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CertificaatBeschrijving")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InhoudBeschrijving")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CursusBeschrijvingID");
+
+                    b.ToTable("CursusBeschrijving");
                 });
 
             modelBuilder.Entity("WhizMA.Models.CursusInhoud", b =>
@@ -374,6 +415,9 @@ namespace WhizMA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("DocentBeschrijvingID")
+                        .HasColumnType("int");
+
                     b.Property<string>("DocentNaam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -390,7 +434,7 @@ namespace WhizMA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CursusID")
+                    b.Property<int>("CursusBeschrijvingID")
                         .HasColumnType("int");
 
                     b.Property<string>("Subtitel")
@@ -410,7 +454,7 @@ namespace WhizMA.Migrations
 
                     b.HasKey("InfoID");
 
-                    b.HasIndex("CursusID");
+                    b.HasIndex("CursusBeschrijvingID");
 
                     b.ToTable("InfoNodes");
                 });
@@ -506,6 +550,15 @@ namespace WhizMA.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WhizMA.Models.Bundel", b =>
+                {
+                    b.HasOne("WhizMA.Models.BundelBeschrijving", "BundelBeschrijving")
+                        .WithOne("Bundel")
+                        .HasForeignKey("WhizMA.Models.Bundel", "BundelBeschrijvingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WhizMA.Models.BundelInhoud", b =>
                 {
                     b.HasOne("WhizMA.Models.Bundel", "Bundel")
@@ -523,6 +576,12 @@ namespace WhizMA.Migrations
 
             modelBuilder.Entity("WhizMA.Models.Cursus", b =>
                 {
+                    b.HasOne("WhizMA.Models.CursusBeschrijving", "CursusBeschrijving")
+                        .WithOne("Cursus")
+                        .HasForeignKey("WhizMA.Models.Cursus", "CursusBeschrijvingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WhizMA.Models.Docent", "Docent")
                         .WithMany("Cursussen")
                         .HasForeignKey("DocentID")
@@ -547,9 +606,9 @@ namespace WhizMA.Migrations
 
             modelBuilder.Entity("WhizMA.Models.InfoNode", b =>
                 {
-                    b.HasOne("WhizMA.Models.Cursus", "Cursus")
+                    b.HasOne("WhizMA.Models.CursusBeschrijving", "CursusBeschrijving")
                         .WithMany("InfoNodes")
-                        .HasForeignKey("CursusID")
+                        .HasForeignKey("CursusBeschrijvingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

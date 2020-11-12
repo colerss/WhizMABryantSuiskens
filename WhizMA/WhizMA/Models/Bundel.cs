@@ -16,6 +16,9 @@ namespace WhizMA.Models
         public string Afbeelding { get; set; }
         public decimal StandaardPrijs { get; set; }
         public decimal HuidigePrijs { get; set; }
+        
+        public int BundelBeschrijvingID { get; set; }
+        public BundelBeschrijving BundelBeschrijving { get; set; }
 
         public ICollection<BundelInhoud> BundelInhoud { get; set; }
     }

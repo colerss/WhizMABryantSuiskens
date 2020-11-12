@@ -17,7 +17,42 @@
         box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     }
 
-    .card-text {
-        text-overflow: clip;
-        height: 30%;
-    }
+.card * {
+    margin: 0px;
+    padding: 0px;
+}
+
+.card-text {
+    width:inherit;
+    overflow: hidden;
+    font-size: 0.85em;
+    text-overflow: ellipsis;
+    max-height: 60px;
+}
+
+.mainPrice {
+    font-size: 1.2em;
+    color: darkred;
+}
+.secondaryPrice {
+    font-size: 0.9em;
+}
+
+.sectionHeader {
+    background-color: #5dbcd2;
+    color: white;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+.sectionCatalogue {
+    background-color: white;
+    color: white;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 70px;
+    background-color: #5dbcd2;
+}

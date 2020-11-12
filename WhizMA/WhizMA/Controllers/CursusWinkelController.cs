@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WhizMA.Data;
 using WhizMA.Models;
+using WhizMA.ViewModels;
 
 namespace WhizMA.Controllers
 {
@@ -27,10 +28,13 @@ namespace WhizMA.Controllers
         }
         public async Task<IActionResult> Catalogus()
         {
-            var whizMAContext = _context.Cursussen
+            CatalogusCursussenViewModel viewModel = new CatalogusCursussenViewModel();
+            viewModel.Cursussen = await _context.Cursussen
                 .Include(c => c.Docent)
-                .Include(c => c.CursusInhoud);
-            return View(await whizMAContext.ToListAsync());
+                .Include(c => c.CursusInhoud)
+                .Include(c => c.CursusBeschrijving)
+                .ToListAsync();
+            return View(viewModel);
         }
 
         // GET: CursusWinkel/Details/5
@@ -60,7 +64,6 @@ namespace WhizMA.Controllers
 
             var cursus = await _context.Cursussen
                 .Include(c => c.Docent)
-                .Include(c => c.InfoNodes)
                 .Include(c => c.CursusInhoud)
                 .FirstOrDefaultAsync(m => m.CursusID == id);
             if (cursus == null)
@@ -85,7 +88,7 @@ namespace WhizMA.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CursusID,Naam,StandaardPrijs,HuidigePrijs,Beschrijving,Afbeelding,Gecertificieerd,BeschikbaarheidInMaanden,DocentID")] Cursus cursus)
+        public async Task<IActionResult> Create([Bind("CursusID,Naam,StandaardPrijs,HuidigePrijs,Afbeelding,Gecertificieerd,BeschikbaarheidInMaanden,DocentID")] Cursus cursus)
         {
             if (ModelState.IsValid)
             {
