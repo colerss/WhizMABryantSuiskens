@@ -52,16 +52,34 @@
     <div class="container">
         <div id="accordiond">
 
-            @foreach (var item in Model.Cursus.CursusInhoud)
+            @foreach (var item in Model.Cursus.CursusInhoud.OrderBy(x => x.Positie))
             {
             <div class="card">
                 <a class="" data-toggle="collapse" data-target="#@Model.FormatId(item, "collapse")" aria-expanded="true" aria-controls="@Model.FormatId(item, "collapse")">
                     <div class="card-header" id="@Model.FormatId(item, "heading")">
-                        <h5 class="mb-0">
+                       <div class="row">
+                           <div class="col-1">
+                               <h5 class="mb-0">
 
-                            @item.Les.Naam
+                                   @item.Positie
 
-                        </h5>
+                               </h5>
+                           </div>
+                           <div class="col-9">
+                               <h5 class="mb-0">
+
+                                   @item.Les.Naam
+
+                               </h5>
+                           </div>
+                           <div class="col-2">
+                               <h5 class="mb-0">
+
+                                   @item.Les.LesStappen.Count Stappen
+
+                               </h5>
+                           </div>
+                       </div>
                     </div>
                 </a>
 
@@ -88,10 +106,19 @@
 </div>
 <div class="sectionInfoNodes">
     <div class="container">
-        @foreach (var item in Model.Cursus.CursusBeschrijving.InfoNodes)
-        {
-
-        }
+        <div class="row">
+            @foreach (var item in Model.Cursus.CursusBeschrijving.InfoNodes)
+            {
+            <div class="card border-0 col-3">
+                <img class="card-img-top" src="@item.Afbeelding" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Titel</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@item.Subtitel</h6>
+                    <p class="card-text">@item.Beschrijving</p>
+                </div>
+            </div>
+            }
+        </div>
     </div>
 </div>
 <div class="sectionDocent">

@@ -14,9 +14,9 @@ namespace WhizMA.Models
         public string Titel { get; set; }
         public string Subtitel { get; set; }
         [Required]
-        public string beschrijving { get; set; }
+        public string Beschrijving { get; set; }
         [Required]
-        public string afbeelding { get; set; }
+        public string Afbeelding { get; set; }
         public int CursusBeschrijvingID { get; set; }
 
         //navprops
