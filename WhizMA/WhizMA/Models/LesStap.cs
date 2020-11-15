@@ -10,14 +10,17 @@ namespace WhizMA.Models
     {
         [Key]
         public int LesStapID { get; set; }
-        public int LesStapNaam { get; set; }
+        public string LesStapNaam { get; set; }
 
         public string LesStapText { get; set; }
+        public string VideoAddress { get; set; }
         public TimeSpan StapTimeStamp { get; set; }
-        public string StapIcon { get; set; }
 
         public int LesID { get; set; }
 
+        public int StapIconID { get; set; }
+
+        public StapIcon StapIcon { get; set; }
         public Les Les { get; set; }
     }
 }

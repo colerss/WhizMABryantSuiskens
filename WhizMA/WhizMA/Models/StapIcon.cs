@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace WhizMA.Models
 {
-    public class Les
+    public class StapIcon
     {
         [Key]
-        public int LesID { get; set; }
-        [Required]
-        public string Naam { get; set; }
+        public int StapIconID { get; set; }
 
+        public string StapIconClass { get; set; }
+        public string StapIconPath { get; set; }
 
-        public ICollection<CursusInhoud> CursusInhouden{ get; set; }
         public ICollection<LesStap> LesStappen { get; set; }
     }
 }

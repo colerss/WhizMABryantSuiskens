@@ -32,6 +32,7 @@ namespace WhizMA.Controllers
         }
         public async Task<IActionResult> Cursus(int? id)
         {
+            CursusDetailViewModel viewModel = new CursusDetailViewModel();
             if (id == null)
             {
                 return NotFound();
@@ -42,6 +43,7 @@ namespace WhizMA.Controllers
                 .Include(c => c.CursusInhoud)
                 .ThenInclude(c => c.Les)
                 .ThenInclude(c => c.LesStappen)
+                .ThenInclude(c => c.StapIcon)
                 .Include(c => c.CursusBeschrijving)
                 .ThenInclude(c => c.InfoNodes)
                 .FirstOrDefaultAsync(m => m.CursusID == id);
@@ -49,8 +51,8 @@ namespace WhizMA.Controllers
             {
                 return NotFound();
             }
-
-            return View(cursus);
+            viewModel.Cursus = cursus;
+            return View(viewModel);
         }
         // GET: CursusWinkel
         public async Task<IActionResult> Index()

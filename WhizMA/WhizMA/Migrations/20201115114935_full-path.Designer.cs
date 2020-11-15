@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhizMA.Data;
 
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    partial class WhizMAContextModelSnapshot : ModelSnapshot
+    [Migration("20201115114935_full-path")]
+    partial class fullpath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -507,8 +509,11 @@ namespace WhizMA.Migrations
                     b.Property<string>("LesStapText")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StapIconID")
-                        .HasColumnType("int");
+                    b.Property<string>("StapIcon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StapIconPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<TimeSpan>("StapTimeStamp")
                         .HasColumnType("time");
@@ -520,27 +525,7 @@ namespace WhizMA.Migrations
 
                     b.HasIndex("LesID");
 
-                    b.HasIndex("StapIconID");
-
                     b.ToTable("LesStap");
-                });
-
-            modelBuilder.Entity("WhizMA.Models.StapIcon", b =>
-                {
-                    b.Property<int>("StapIconID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("StapIconClass")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StapIconPath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("StapIconID");
-
-                    b.ToTable("StapIcon");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -675,12 +660,6 @@ namespace WhizMA.Migrations
                     b.HasOne("WhizMA.Models.Les", "Les")
                         .WithMany("LesStappen")
                         .HasForeignKey("LesID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WhizMA.Models.StapIcon", "StapIcon")
-                        .WithMany("LesStappen")
-                        .HasForeignKey("StapIconID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

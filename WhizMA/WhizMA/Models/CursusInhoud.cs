@@ -12,7 +12,7 @@ namespace WhizMA.Models
         public int CursusInhoudID { get; set; }
         public int CursusID { get; set; }
         public int LesID { get; set; }
-        public TimeSpan LesInterval { get; set; }
+        public int LesIntervalWeken { get; set; }
         public int Positie { get; set; }
 
 

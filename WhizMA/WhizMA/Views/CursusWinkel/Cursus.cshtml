@@ -1,7 +1,7 @@
-﻿@model WhizMA.Models.Cursus
+﻿@model WhizMA.ViewModels.CursusDetailViewModel
 
 @{
-    ViewData["Title"] = Model.Naam;
+    ViewData["Title"] = Model.Cursus.Naam;
 }
 
 
@@ -9,16 +9,16 @@
 <link href="~/css/cursusPagina.css" rel="stylesheet" type="text/css" />
 
 <div class="sectionHeader" style=
-     "  background: linear-gradient( rgba(93, 188, 210, 0.8), rgba(93, 188, 210, 0.8) ), url( @Model.Afbeelding );
+     "  background: linear-gradient( rgba(93, 188, 210, 0.8), rgba(93, 188, 210, 0.8) ), url( @Model.Cursus.Afbeelding );
   
 "><!--Style is hier inline gedefinieerd om toe te laten dat de achtergrond image op een invoudige manier er in gezet word-->
     <div class="container align-content-center text-center">
-        <h1 >@Model.Naam</h1>
-        <p>@Model.CursusBeschrijving.InhoudBeschrijving</p>
+        <h1 >@Model.Cursus.Naam</h1>
+        <p>@Model.Cursus.CursusBeschrijving.InhoudBeschrijving</p>
         <h2>Voor wie is deze opleiding?</h2>
         <p>DBNogNietKlaar</p>
         <h2 >Certificieëring</h2>
-        <p>@Model.CursusBeschrijving.CertificaatBeschrijving</p>
+        <p>@Model.Cursus.CursusBeschrijving.CertificaatBeschrijving</p>
         <h2 >Betalingsmogelijkheden</h2>
         <p>De prijs hieronder is exclusief BTW en exclusief kosten van Paypal. 
         Om de paypalkosten te vermijden kunt u een mailtje schrijven naar info@whiz-ma.eu ,
@@ -30,16 +30,16 @@
         <div class="text-center">
             <button type="button" class="btn btn-danger">
                 Start
-                @if (Model.StandaardPrijs == Model.HuidigePrijs)
+                @if (Model.Cursus.StandaardPrijs == Model.Cursus.HuidigePrijs)
                 {
-                    <span class="mainPrice">@Model.HuidigePrijs.ToString("N0")</span>
+                    <span class="mainPrice">@Model.Cursus.HuidigePrijs.ToString("N0")</span>
                 }
                 else
                 {
                     <span class="text-muted secondaryPrice">
-                        <s> €@Model.StandaardPrijs.ToString("N0")</s>
+                        <s> €@Model.Cursus.StandaardPrijs.ToString("N0")</s>
                     </span>
-                    <span class="mainPrice">   €@Model.HuidigePrijs.ToString("N0")</span>
+                    <span class="mainPrice">   €@Model.Cursus.HuidigePrijs.ToString("N0")</span>
                 }
             </button>
         </div>
@@ -50,21 +50,34 @@
 </div>
 <div class="sectionLessons">
     <div class="container">
-        <div id="accordion">
+        <div id="accordiond">
 
-            @foreach (var item in Model.CursusInhoud)
+            @foreach (var item in Model.Cursus.CursusInhoud)
             {
             <div class="card">
-                <div class="card-header" id="@item.Les.Naam">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="@item.Positie" aria-expanded="true" aria-controls="collapseOne">
+                <a class="" data-toggle="collapse" data-target="#@Model.FormatId(item, "collapse")" aria-expanded="true" aria-controls="@Model.FormatId(item, "collapse")">
+                    <div class="card-header" id="@Model.FormatId(item, "heading")">
+                        <h5 class="mb-0">
+
                             @item.Les.Naam
-                        </button>
-                    </h5>
-                </div>
-                <div id="@item.Positie" class="collapse show" aria-labelledby="@item.Les.Naam " data-parent="#accordion">
+
+                        </h5>
+                    </div>
+                </a>
+
+                <div id="@Model.FormatId(item, "collapse")" class="collapse" aria-labelledby="@Model.FormatId(item, "heading")" data-parent="#accordiond">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit
+                        @foreach (var stap in item.Les.LesStappen)
+                        {
+                        <p>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="@stap.StapIcon.StapIconClass" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="@stap.StapIcon.StapIconPath"></path>
+                            </svg>
+                            @stap.LesStapNaam @stap.StapTimeStamp.TotalMinutes:@stap.StapTimeStamp.ToString("ss")
+                        </p>
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -75,7 +88,7 @@
 </div>
 <div class="sectionInfoNodes">
     <div class="container">
-        @foreach (var item in Model.CursusBeschrijving.InfoNodes)
+        @foreach (var item in Model.Cursus.CursusBeschrijving.InfoNodes)
         {
 
         }
@@ -83,6 +96,7 @@
 </div>
 <div class="sectionDocent">
     <div class="container">
+       
 
     </div>
 </div>
