@@ -52,7 +52,7 @@
             @foreach (var item in Model.Bundels)
             {
                 <div class="col-sm-6 col-lg-4  my-3">
-                    <a class="btn" asp-action="Cursus" asp-route-id="@item.BundelID">
+                    <a class="btn" asp-action="Bundel" asp-route-id="@item.BundelID">
                         <div class="card border-dark customCard">
                             <img class="card-img-top" src="@item.Afbeelding" alt="@item.Naam">
                             <div class="card-body">

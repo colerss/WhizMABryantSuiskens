@@ -10,7 +10,6 @@
 
 <div class="sectionHeader" style=
      "  background: linear-gradient( rgba(93, 188, 210, 0.8), rgba(93, 188, 210, 0.8) ), url( @Model.Cursus.Afbeelding );
-  
 "><!--Style is hier inline gedefinieerd om toe te laten dat de achtergrond image op een invoudige manier er in gezet word-->
     <div class="container align-content-center text-center">
         <h1 >@Model.Cursus.Naam</h1>
@@ -59,11 +58,11 @@
                     <div class="card-header" id="@Model.FormatId(item, "heading")">
                        <div class="row">
                            <div class="col-1">
-                               <h5 class="mb-0">
+                               <h2 class="mb-0">
 
                                    @item.Positie
 
-                               </h5>
+                               </h2>
                            </div>
                            <div class="col-9">
                                <h5 class="mb-0">

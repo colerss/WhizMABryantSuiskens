@@ -1,0 +1,55 @@
+﻿@model WhizMA.ViewModels.BundelDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Bundel.Naam;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="~/css/bundelPagina.css" rel="stylesheet" type="text/css" />
+
+
+<div class="sectionHeader">
+    <div class="container align-content-center text-center">
+        <h1>
+            @Model.Bundel.Naam
+        </h1>
+        <p>
+            @Model.Bundel.BundelBeschrijving.BundelInhoudsBeschrijving
+        </p>
+    </div>
+</div>
+@{int i = 0;}
+@foreach (BundelInhoud item in Model.Bundel.BundelInhoud)
+{
+<div class="sectionCursus" style="background: linear-gradient( @(i % 2 == 0 ? "rgba(93, 188, 210, 0.8), rgba(93, 188, 210, 0.8)" : "rgba(93, 188, 210, 0.8), rgba(93, 188, 210, 0.8)"), url(@item.Cursus.Afbeelding );">
+    <div class="container">
+        <h2>@item.Cursus.Naam</h2>
+        <p>
+            @item.Cursus.CursusBeschrijving.InhoudBeschrijving
+        </p>
+    </div>
+</div>
+    i++;
+}
+<div class="BundelPrice">
+    <div class="container">
+        <div class="text-center">
+            <button type="button" class="btn btn-danger">
+                Start
+                @if (Model.Bundel.StandaardPrijs == Model.Bundel.HuidigePrijs)
+                {
+                    <span class="mainPrice">@Model.Bundel.HuidigePrijs.ToString("N0")</span>
+                }
+                else
+                {
+                    <span class="text-muted secondaryPrice">
+                        <s> €@Model.Bundel.StandaardPrijs.ToString("N0")</s>
+                    </span>
+                    <span class="mainPrice">   €@Model.Bundel.HuidigePrijs.ToString("N0")</span>
+                }
+            </button>
+        </div>
+    </div>
+</div>
+
+
+

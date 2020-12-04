@@ -53,6 +53,27 @@ namespace WhizMA.Controllers
 
             return View(bundel);
         }
+        public async Task<IActionResult> Bundel(int? id)
+        {
+            BundelDetailsViewModel viewModel = new BundelDetailsViewModel();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var bundel = await _context.Bundels
+                .Include(c => c.BundelBeschrijving)
+                .Include(c => c.BundelInhoud)
+                .ThenInclude(c => c.Cursus)
+                .ThenInclude(c => c.CursusBeschrijving)
+                .FirstOrDefaultAsync(m => m.BundelID == id);
+            if (bundel == null)
+            {
+                return NotFound();
+            }
+            viewModel.Bundel = bundel;
+            return View(viewModel);
+        }
 
         // GET: Bundels/Create
         public IActionResult Create()
