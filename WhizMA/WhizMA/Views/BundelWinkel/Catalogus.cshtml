@@ -1,4 +1,4 @@
-﻿@model WhizMA.ViewModels.CatalogusCursussenViewModel
+﻿@model WhizMA.ViewModels.CatalogusBundelViewModel
 
 @{
     ViewData["Title"] = "Catalogus";
@@ -11,19 +11,19 @@
 <div class="sectionHeader">
     <div class="container">
         <div>
-            <h1 class=" text-center">Cursus Overzicht</h1>
+            <h1 class=" text-center">Bundel Overzicht</h1>
         </div>
         <div>
             <hr class="w-25 text-center" />
         </div>
         <div>
-            <h3 class=" text-center">Neem in kijkje in all onze cursussen</h3>
+            <h3 class=" text-center">Op zoek naar een stevig lespakket?</h3>
         </div>
     </div>
 </div>
 <div class="sectionSearchbar">
     <div class="container">
-        <form asp-controller="CursusWinkel" asp-action="Search" method="get">
+        <form asp-controller="BundelWinkel" asp-action="Search" method="get">
             <div class="btn-toolbar justify-content-center" role="toolbar">
                 <div class="btn-group mr-2 btn-group-toggle" data-toggle="buttons" role="group">
                     <label class="btn active btn-info">
@@ -36,11 +36,8 @@
                         <input type="radio" name="options" id="option3" autocomplete="off"> Populair
                     </label>
                 </div>
-                <div class="btn-group mr-2" role="group">
-                    <select class="form-control" asp-items="ViewBag.Docent" asp-for="DocentSearch" ></select>
-                </div>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Wat wil je leren?" asp-for="CursusSearch"/>
+                    <input type="text" class="form-control" placeholder="Wat wil je leren?" asp-for="BundelSearch" />
                 </div>
                 <div class="col-auto">
                     <input type="submit" value="Zoeken" class="btn btn-primary" />
@@ -52,15 +49,15 @@
 <div class="sectionCatalogue">
     <div class="container">
         <div class="row d-flex">
-            @foreach (var item in Model.Cursussen)
+            @foreach (var item in Model.Bundels)
             {
-                <div class="col-sm-6 col-lg-3  my-3">
-                    <a class="btn" asp-action="Cursus" asp-route-id="@item.CursusID">
+                <div class="col-sm-6 col-lg-4  my-3">
+                    <a class="btn" asp-action="Cursus" asp-route-id="@item.BundelID">
                         <div class="card border-dark customCard">
                             <img class="card-img-top" src="@item.Afbeelding" alt="@item.Naam">
                             <div class="card-body">
                                 <h5 class="card-title">@Html.DisplayFor(modelItem => item.Naam)</h5>
-                                <p class="card-text">@Html.DisplayFor(modelItem => item.CursusBeschrijving.InhoudBeschrijving)</p>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.BundelBeschrijving.BundelInhoudsBeschrijving)</p>
 
                             </div>
                             <ul class="list-group list-group-flush">
@@ -69,14 +66,14 @@
                                         Kosten <br />
                                         @if (item.StandaardPrijs == item.HuidigePrijs)
                                         {
-                                            <span class="mainPrice">@Model.CursusPrijs(item.HuidigePrijs)</span>
+                                            <span class="mainPrice">@Model.BundelPrijs(item.HuidigePrijs)</span>
                                         }
                                         else
                                         {
                                             <span class="text-muted secondaryPrice">
-                                                <s> @Model.CursusPrijs(item.StandaardPrijs)</s>
+                                                <s> @Model.BundelPrijs(item.StandaardPrijs)</s>
                                             </span>
-                                            <span class="mainPrice">    @Model.CursusPrijs(item.HuidigePrijs)</span>
+                                            <span class="mainPrice">    @Model.BundelPrijs(item.HuidigePrijs)</span>
                                         }
                                     </p>
                                 </li>

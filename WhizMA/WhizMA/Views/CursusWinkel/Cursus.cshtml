@@ -107,17 +107,19 @@
 <div class="sectionInfoNodes">
     <div class="container">
         <div class="row">
+            <div class="col-2"></div>
             @foreach (var item in Model.Cursus.CursusBeschrijving.InfoNodes)
             {
-            <div class="card border-0 col-3 m-3 bg-transparent">
-                <img class="card-img-top rounded-circle" src="@item.Afbeelding" width="150" height="150" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Titel</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@item.Subtitel</h6>
-                    <p class="card-text">@item.Beschrijving</p>
+                <div class="card border-0 col-2 m-3 bg-transparent">
+                    <img class="card-img-top rounded-circle" src="@item.Afbeelding" width="150" height="150" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Titel</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Subtitel</h6>
+                        <p class="card-text">@item.Beschrijving</p>
+                    </div>
                 </div>
-            </div>
             }
+            <div class="col-2"></div>
         </div>
     </div>
 </div>

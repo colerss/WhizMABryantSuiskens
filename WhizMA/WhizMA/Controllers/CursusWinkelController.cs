@@ -26,8 +26,7 @@ namespace WhizMA.Controllers
                 .Include(c => c.CursusInhoud)
                 .Include(c => c.CursusBeschrijving)
                 .ToListAsync();
-
-            ViewData["DocentID"] = new SelectList(_context.Docenten, "DocentID", "DocentNaam");
+            ViewData["Docent"] = new SelectList(_context.Docenten, "DocentID", "DocentNaam");
             return View(viewModel);
         }
         public async Task<IActionResult> Cursus(int? id)
@@ -91,6 +90,30 @@ namespace WhizMA.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Search(CatalogusCursussenViewModel viewModel)
+        {
+            if (!string.IsNullOrEmpty(viewModel.CursusSearch))
+            {
+                    viewModel.Cursussen = await _context.Cursussen
+                     .Include(c => c.Docent)
+                      .Include(c => c.CursusInhoud)
+                      .Include(c => c.CursusBeschrijving)
+                .Where(b => b.DocentID == viewModel.DocentSearch)
+                .Where(b => b.Naam.Contains(viewModel.CursusSearch)).ToListAsync();
+            }
+            else
+            {
+                viewModel.Cursussen = await _context.Cursussen
+                .Include(c => c.Docent)
+                .Include(c => c.CursusInhoud)
+                .Include(c => c.CursusBeschrijving)
+                .ToListAsync();
+            }
+            ViewData["Docent"] = new SelectList(_context.Docenten, "DocentID", "DocentNaam");
+
+            return View("Catalogus", viewModel);
+        }
+
         // POST: CursusWinkel/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -101,14 +124,17 @@ namespace WhizMA.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(viewModel.CursusBeschrijving);
-                await _context.SaveChangesAsync();
-                viewModel.Cursus.CursusBeschrijvingID = viewModel.CursusBeschrijving.CursusBeschrijvingID;
-                _context.Add(viewModel.Cursus);
-               
-               
-               
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                int saveCheck = await _context.SaveChangesAsync();
+                if (saveCheck != 0)
+                {
+                    viewModel.Cursus.CursusBeschrijvingID = viewModel.CursusBeschrijving.CursusBeschrijvingID;
+                    _context.Add(viewModel.Cursus);
+
+
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             ViewData["DocentID"] = new SelectList(_context.Docenten, "DocentID", "DocentNaam", viewModel.Cursus.DocentID);
             return View(viewModel);
@@ -131,6 +157,7 @@ namespace WhizMA.Controllers
             ViewData["DocentID"] = new SelectList(_context.Docenten, "DocentID", "DocentNaam", cursus.DocentID);
             return View(cursus);
         }
+
 
         // POST: CursusWinkel/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

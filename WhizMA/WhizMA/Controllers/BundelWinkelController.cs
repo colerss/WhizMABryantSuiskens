@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WhizMA.Data;
 using WhizMA.Models;
+using WhizMA.ViewModels;
 
 namespace WhizMA.Controllers
 {
@@ -19,6 +20,16 @@ namespace WhizMA.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Catalogus()
+        {
+            CatalogusBundelViewModel viewModel = new CatalogusBundelViewModel();
+            viewModel.Bundels = await _context.Bundels
+                .Include(c => c.BundelBeschrijving)
+                .Include(c => c.BundelInhoud)
+                .ThenInclude(c => c.Cursus)
+                .ToListAsync();
+            return View(viewModel);
+        }
         // GET: Bundels
         public async Task<IActionResult> Index()
         {
@@ -46,6 +57,9 @@ namespace WhizMA.Controllers
         // GET: Bundels/Create
         public IActionResult Create()
         {
+            BundelCreateViewModel viewModel = new BundelCreateViewModel();
+            viewModel.Bundel = new Bundel();
+            viewModel.BundelBeschrijving = new BundelBeschrijving();
             return View();
         }
 
@@ -54,15 +68,22 @@ namespace WhizMA.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BundelID,Naam,Afbeelding,StandaardPrijs,HuidigePrijs")] Bundel bundel)
+        public async Task<IActionResult> Create(BundelCreateViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bundel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.Add(viewModel.BundelBeschrijving);
+                int saveCheck = await _context.SaveChangesAsync();
+                if (saveCheck != 0)
+                {
+                    viewModel.Bundel.BundelBeschrijvingID = viewModel.BundelBeschrijving.BundelBeschrijvingID;
+                    _context.Add(viewModel.Bundel);
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            return View(bundel);
+            return View(viewModel);
         }
 
         // GET: Bundels/Edit/5
