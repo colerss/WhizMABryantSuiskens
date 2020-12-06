@@ -12,6 +12,7 @@ using WhizMA.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WhizMA.Areas.Identity.Data;
 
 namespace WhizMA
 {
@@ -30,7 +31,7 @@ namespace WhizMA
             services.AddDbContext<WhizMAContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<Account>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<WhizMAContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();

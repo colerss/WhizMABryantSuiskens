@@ -32,7 +32,6 @@ namespace WhizMA.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Cursus>().ToTable("Cursussen");
             modelBuilder.Entity<Les>().ToTable("Lessen");
             modelBuilder.Entity<CursusInhoud>().ToTable("CursusInhoud");
