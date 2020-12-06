@@ -9,7 +9,7 @@ using WhizMA.Models;
 
 namespace WhizMA.Data
 {
-    public class WhizMAContext : IdentityDbContext<Account>
+    public class WhizMAContext : IdentityDbContext<UserAccount>
     {
         public WhizMAContext (DbContextOptions<WhizMAContext> options) 
             : base(options)
@@ -26,7 +26,7 @@ namespace WhizMA.Data
         public DbSet<BundelInhoud> BundelInhoud { get; set; }
         public DbSet<Cursus> Cursussen { get; set; }
         public DbSet<Docent> Docenten { get; set; }
-        public DbSet<Account> Account { get; set; }
+        public DbSet<UserAccount> Account { get; set; }
         public DbSet<AccountCatalogus> AccountCatalogus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

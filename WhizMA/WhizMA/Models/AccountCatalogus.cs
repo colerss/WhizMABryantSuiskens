@@ -23,6 +23,6 @@ namespace WhizMA.Models
         //navprops
 
         public Cursus Cursus { get; set; }
-        public Account Account { get; set; }
+        public UserAccount Account { get; set; }
     }
 }

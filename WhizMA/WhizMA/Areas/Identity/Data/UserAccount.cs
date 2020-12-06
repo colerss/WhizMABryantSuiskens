@@ -8,7 +8,7 @@ using WhizMA.Models;
 
 namespace WhizMA.Areas.Identity.Data
 {
-    public class Account : IdentityUser
+    public class UserAccount : IdentityUser
     {
        
         [PersonalData]

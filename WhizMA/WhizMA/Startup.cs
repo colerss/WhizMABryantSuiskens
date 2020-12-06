@@ -31,7 +31,7 @@ namespace WhizMA
             services.AddDbContext<WhizMAContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<Account>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<WhizMAContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
