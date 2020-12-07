@@ -14,7 +14,7 @@
             </a>
             <div class="dropdown-menu navbar-custom  " aria-labelledby="accountDropDown">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profiel</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="AccountCatalogus" asp-action="Catalogus">Mijn Lessen</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="AccountCatalogus" asp-action="UserCatalogue">Mijn Lessen</a>
                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                     <button type="submit" class="nav-link  btn btn-link navbar-custom text-dark">Logout</button>
                 </form>

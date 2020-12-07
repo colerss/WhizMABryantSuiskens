@@ -1,0 +1,78 @@
+﻿@model WhizMA.ViewModels.AccountCatalogusViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="~/css/cursusIndex.css" rel="stylesheet" type="text/css" />
+
+<div class="sectionHeader">
+    <div class="container">
+        <div>
+            <h1 class=" text-center">Jouw Cursussen</h1>
+        </div>
+        <div>
+            <hr class="w-25 text-center" />
+        </div>
+        <div>
+            <h3 class=" text-center">Vlieg er in!</h3>
+        </div>
+    </div>
+</div>
+<div class="sectionSearchbar">
+    <div class="container">
+        <form asp-controller="CursusWinkel" asp-action="Search" method="get">
+            <div class="btn-toolbar justify-content-center" role="toolbar">
+                <div class="btn-group mr-2 btn-group-toggle" data-toggle="buttons" role="group">
+                    <label class="btn active btn-info">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Alle Cursussen
+                    </label>
+                    <label class="btn btn-info">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Nieuw
+                    </label>
+                    <label class="btn btn-info">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Populair
+                    </label>
+                </div>
+                <div class="btn-group mr-2" role="group">
+                    <select class="form-control" asp-items="ViewBag.Docent" asp-for="DocentSearch"></select>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Wat zoek je?" asp-for="CursusSearch" />
+                </div>
+                <div class="col-auto">
+                    <input type="submit" value="Zoeken" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="sectionCatalogue">
+    <div class="container">
+        <div class="row d-flex">
+            @foreach (var item in Model.Cursussen)
+            {
+                string percent = (100 / (item.Cursus.CursusInhoud.Count / item.Voortgang)).ToString();
+                string widthVal = percent + "%";
+
+                <div class="col-sm-6 col-lg-3  my-3">
+                    <a class="btn" asp-action="Les" asp-route-id="@item.CursusID">
+                        <div class="card border-dark customCard">
+                            <img class="card-img-top" src="@item.Cursus.Afbeelding" alt="@item.Cursus.Naam">
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Cursus.Naam)</h5>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.Cursus.CursusBeschrijving.InhoudBeschrijving)</p>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: @widthVal" aria-valuenow="@item.Voortgang" aria-valuemin="0" aria-valuemax="@item.Cursus.CursusInhoud.Count"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
