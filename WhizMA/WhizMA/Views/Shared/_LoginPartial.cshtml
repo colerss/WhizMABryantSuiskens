@@ -1,17 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using WhizMA.Areas.Identity.Data
-@inject SignInManager<Account> SignInManager
-@inject UserManager<Account> UserManager
+@inject SignInManager<UserAccount> SignInManager
+@inject UserManager<UserAccount> UserManager
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" />
 <ul class="navbar-nav flex-grow-1 navbar-item-custom justify-content-md-center justify-content-end">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item navbar-item-spacing navbar-hoverline">
-            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profiel</a>
+        <li class="nav-item dropdown navbar-item-spacing navbar-hoverline">
+            <a class="nav-link text-light dropdown-toggle" href="#" id="accountDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+            </a>
+            <div class="dropdown-menu navbar-custom  " aria-labelledby="accountDropDown">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profiel</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="AccountCatalogus" asp-action="Catalogus">Mijn Lessen</a>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link  btn btn-link navbar-custom text-dark">Logout</button>
+                </form>
+            </div>
         </li>
-
     }
     else
     {

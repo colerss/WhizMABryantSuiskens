@@ -10,10 +10,7 @@ namespace WhizMA.Areas.Identity.Data
 {
     public class UserAccount : IdentityUser
     {
-       
-        [PersonalData]
-        public string Naam { get; set; }
-
+      
         public ICollection<AccountCatalogus> AccountCatalogus { get; set; }
     }
 }
