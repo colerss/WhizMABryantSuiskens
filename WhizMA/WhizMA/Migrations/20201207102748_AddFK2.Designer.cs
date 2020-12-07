@@ -10,8 +10,8 @@ using WhizMA.Data;
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    [Migration("20201207101241_removeRedundancy")]
-    partial class removeRedundancy
+    [Migration("20201207102748_AddFK2")]
+    partial class AddFK2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,7 +228,7 @@ namespace WhizMA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AccountId")
+                    b.Property<string>("AccountID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CursusID")
@@ -242,7 +242,7 @@ namespace WhizMA.Migrations
 
                     b.HasKey("CatalogusItemID");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("AccountID");
 
                     b.HasIndex("CursusID");
 
@@ -597,7 +597,7 @@ namespace WhizMA.Migrations
                 {
                     b.HasOne("WhizMA.Areas.Identity.Data.UserAccount", "Account")
                         .WithMany("AccountCatalogus")
-                        .HasForeignKey("AccountId");
+                        .HasForeignKey("AccountID");
 
                     b.HasOne("WhizMA.Models.Cursus", "Cursus")
                         .WithMany("AccountCatalogus")

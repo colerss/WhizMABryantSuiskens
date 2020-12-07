@@ -154,7 +154,7 @@ namespace WhizMA.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WhizMA.Areas.Identity.Data.Account", b =>
+            modelBuilder.Entity("WhizMA.Areas.Identity.Data.UserAccount", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -178,9 +178,6 @@ namespace WhizMA.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Naam")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
@@ -229,7 +226,7 @@ namespace WhizMA.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AccountId")
+                    b.Property<string>("AccountID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CursusID")
@@ -243,7 +240,7 @@ namespace WhizMA.Migrations
 
                     b.HasKey("CatalogusItemID");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("AccountID");
 
                     b.HasIndex("CursusID");
 
@@ -554,7 +551,7 @@ namespace WhizMA.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("WhizMA.Areas.Identity.Data.Account", null)
+                    b.HasOne("WhizMA.Areas.Identity.Data.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -563,7 +560,7 @@ namespace WhizMA.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("WhizMA.Areas.Identity.Data.Account", null)
+                    b.HasOne("WhizMA.Areas.Identity.Data.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -578,7 +575,7 @@ namespace WhizMA.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WhizMA.Areas.Identity.Data.Account", null)
+                    b.HasOne("WhizMA.Areas.Identity.Data.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -587,7 +584,7 @@ namespace WhizMA.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("WhizMA.Areas.Identity.Data.Account", null)
+                    b.HasOne("WhizMA.Areas.Identity.Data.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -596,9 +593,9 @@ namespace WhizMA.Migrations
 
             modelBuilder.Entity("WhizMA.Models.AccountCatalogus", b =>
                 {
-                    b.HasOne("WhizMA.Areas.Identity.Data.Account", "Account")
+                    b.HasOne("WhizMA.Areas.Identity.Data.UserAccount", "Account")
                         .WithMany("AccountCatalogus")
-                        .HasForeignKey("AccountId");
+                        .HasForeignKey("AccountID");
 
                     b.HasOne("WhizMA.Models.Cursus", "Cursus")
                         .WithMany("AccountCatalogus")
