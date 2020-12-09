@@ -28,7 +28,7 @@ namespace WhizMA.Data
         public DbSet<Docent> Docenten { get; set; }
         public DbSet<UserAccount> Account { get; set; }
         public DbSet<AccountCatalogus> AccountCatalogus { get; set; }
-
+        public DbSet<AlertItem> AlertItem { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -56,6 +56,6 @@ namespace WhizMA.Data
             modelBuilder.Entity<Cursus>().Property(p => p.StandaardPrijs).HasColumnType("decimal(18,2)");
         }
 
-        public DbSet<WhizMA.Models.AlertItem> AlertItem { get; set; }
+       
     }
 }

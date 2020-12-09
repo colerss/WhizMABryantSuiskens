@@ -2,7 +2,7 @@
 
 namespace WhizMA.Migrations
 {
-    public partial class AlertItem : Migration
+    public partial class AddAlertItems2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

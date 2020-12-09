@@ -10,8 +10,8 @@ using WhizMA.Data;
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    [Migration("20201209145944_AlertItem")]
-    partial class AlertItem
+    [Migration("20201209150625_AddAlertItems2")]
+    partial class AddAlertItems2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
