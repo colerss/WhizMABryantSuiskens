@@ -8,13 +8,11 @@ using WhizMA.Models;
 
 namespace WhizMA.ViewModels
 {
-    public class CursusDetailViewModel
+    public class CursusDetailViewModel : DetailViewModel
     {
         public Cursus Cursus { get; set; }
 
-        public bool IsLogged { get; set; }
-        public bool IsOwned { get; set; }
-        public UserAccount CurrentUser { get; set; }
+       
         public string FormatId(CursusInhoud cursusInhoud, string append)
         {
             return append + cursusInhoud.CursusInhoudID;

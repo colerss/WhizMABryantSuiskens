@@ -24,7 +24,7 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@ViewContext.HttpContext.Request.Path">Login</a>
         </li>
     }
 </ul>

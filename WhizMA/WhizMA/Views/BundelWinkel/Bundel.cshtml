@@ -35,20 +35,51 @@
 <div class="sectionPrice">
     <div class="container">
         <div class="text-center">
-            <button type="button" class="btn btn-danger">
-                Start
-                @if (Model.Bundel.StandaardPrijs == Model.Bundel.HuidigePrijs)
-                {
-                    <span class="mainPrice">@Model.Bundel.HuidigePrijs.ToString("N0")</span>
+            @if (Model.IsLogged)
+            {
+                <text>
+                    @if (Model.IsOwned)
+                    {
+                        <a class="btn btn-primary" asp-controller="AccountCatalogus" asp-action="UserCatalogue">
+                            Naar Lessen
+                        </a>
+                    }
+                    else
+                    {
+                        <text>
+                        <form asp-action="Buy">
+                            <input type="hidden" asp-for="Bundel.BundelID" value="@Model.Bundel.BundelID" />
+                            <input type="hidden" asp-for="IsLogged" value="@Model.IsLogged" />
+                            <input type="hidden" asp-for="IsOwned" value="@Model.IsOwned" />
+                            <input type="hidden" asp-for="CurrentUser.Id" value="@Model.CurrentUser.Id" />
+
+                            <button type="submit" id="button" class="btn btn-danger">
+                                Start
+
+                                @if (Model.Bundel.StandaardPrijs == Model.Bundel.HuidigePrijs)
+                                {
+                                    <span class="mainPrice"> €@Model.Bundel.HuidigePrijs.ToString("N0")</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted secondaryPrice">
+                                        <s> €@Model.Bundel.StandaardPrijs.ToString("N0")</s>
+                                    </span>
+                                    <span class="mainPrice">   €@Model.Bundel.HuidigePrijs.ToString("N0")</span>
+                                }
+                            </button>
+                        </form>
+                </text>
+            }
+                    </text>
                 }
                 else
                 {
-                    <span class="text-muted secondaryPrice">
-                        <s> €@Model.Bundel.StandaardPrijs.ToString("N0")</s>
-                    </span>
-                    <span class="mainPrice">   €@Model.Bundel.HuidigePrijs.ToString("N0")</span>
+                    <a class="btn btn-danger" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@ViewContext.HttpContext.Request.Path">
+                        Log in om te kopen
+                    </a>
                 }
-            </button>
+
         </div>
     </div>
 </div>

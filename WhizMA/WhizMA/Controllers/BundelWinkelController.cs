@@ -76,6 +76,22 @@ namespace WhizMA.Controllers
                 return NotFound();
             }
             viewModel.Bundel = bundel;
+            viewModel.IsLogged = User.Identity.IsAuthenticated;
+            viewModel.CurrentUser = _context.Account.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            if (viewModel.IsLogged)
+            {
+
+                List<AccountCatalogus> accountCatalogus = await _context.AccountCatalogus
+                .Where(c => c.Account.UserName == User.Identity.Name)
+                .Include(c => c.Cursus)
+                .ToListAsync();
+
+                viewModel.IsOwned = (accountCatalogus.Where(x => viewModel.Bundel.BundelInhoud.Any(c => c.CursusID == x.CursusID)).Count() > 0);
+            }
+            else
+            {
+                viewModel.IsOwned = false;
+            }
             return View(viewModel);
         }
 
@@ -112,20 +128,17 @@ namespace WhizMA.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToAccount(BundelDetailsViewModel viewModel)
+        public async Task<IActionResult> Buy(BundelDetailsViewModel viewModel)
         {
-            if (User.Identity.IsAuthenticated)
+            if (viewModel.IsLogged)
             {
-                UserAccount currentUser = _context.Account.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
-                if (ModelState.IsValid)
-                {
-                    foreach (BundelInhoud cursus in viewModel.Bundel.BundelInhoud)
+                foreach (BundelInhoud cursus in viewModel.Bundel.BundelInhoud)
                     {
                         AccountCatalogus newItem = new AccountCatalogus
                         {
-                            AccountID = currentUser.Id,
-                            CursusID = cursus.CursusID,
-                            Voortgang = 0,
+                            CursusID = cursus.Cursus.CursusID,
+                            Voortgang = 1,
+                            AccountID = viewModel.CurrentUser.Id,
                             VerloopTijd = DateTime.Now.AddMonths(cursus.Cursus.BeschikbaarheidInMaanden)
                         };
                         _context.Add(newItem);
@@ -133,10 +146,8 @@ namespace WhizMA.Controllers
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
-                }
             }
-           
-            return View(viewModel);
+           throw new Exception();
         }
 
 

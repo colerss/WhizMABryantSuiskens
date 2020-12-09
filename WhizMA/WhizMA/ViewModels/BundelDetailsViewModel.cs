@@ -6,7 +6,7 @@ using WhizMA.Models;
 
 namespace WhizMA.ViewModels
 {
-    public class BundelDetailsViewModel
+    public class BundelDetailsViewModel : DetailViewModel
     {
         public Bundel Bundel { get; set; }
     }
