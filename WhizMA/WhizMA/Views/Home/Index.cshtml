@@ -1,16 +1,26 @@
-﻿@{
+﻿@model WhizMA.ViewModels.HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link href="~/css/home.css" rel="stylesheet" type="text/css" />
 <div class="section1">
-    <div  class="container">
+    <div class="container">
         <div class="row">
             <div class="col-sm-6 text-center">
                 <h2>Leren vanuit je kot!</h2>
                 <br />
-                <button type="button" class="btn btn-login">Schrijf je nu in!</button>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a type="button" class="btn btn-login" asp-area="Identity" asp-page="/AccountCatalogus/UserCatalogue" asp-route-returnUrl="@ViewContext.HttpContext.Request.Path">Aan de slag</a>
+                }
+                else
+                {
+                    <a type="button" class="btn btn-login" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@ViewContext.HttpContext.Request.Path">Schrijf je nu in!</a>
+                }
+
             </div>
             <div class="col-sm-6">
 
@@ -26,35 +36,25 @@
         </h1>
     </div>
 </div>
-<div class="section3">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 text-right">
-                PLACEHOLDER
-            </div>
-            <div class="col-sm-6 text-left">
-                <h3>Titel van nieuws</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pulvinar porttitor diam tincidunt ornare. 
-                    In hendrerit et orci eget dapibus. Etiam luctus nibh nunc, eu consectetur purus tempus sit amet. 
-                    Maecenas efficitur tortor vel ultrices cursus. Pellentesque id suscipit dolor, eget porta velit. 
-                    Nulla lorem nibh, pulvinar quis varius sed, ultrices sed dui. Cras tortor lacus, fermentum id nulla quis, 
-                    viverra scelerisque dui. Nulla consequat sapien vestibulum, condimentum nulla a, hendrerit lacus. 
-                    Praesent nec molestie tortor, non vehicula dui. Morbi interdum semper metus, vitae fermentum metus blandit a. 
-                    Nullam at faucibus ex. Cras molestie velit molestie varius bibendum. Nunc convallis euismod mollis. 
-                    Nullam aliquam leo metus, eu eleifend dolor molestie eu.
-                    <br/>
-                    Pellentesque ultricies nibh nunc, ultricies rhoncus enim posuere sed. 
-                    Phasellus tempus eu enim accumsan iaculis. Etiam cursus efficitur enim, 
-                    sit amet lobortis metus aliquet consectetur. Aliquam est diam, 
-                    venenatis id bibendum eleifend, hendrerit at est. Ut eu nisi vitae 
-                    nulla suscipit euismod at non erat. Maecenas leo ex, venenatis et mi quis, 
-                    eleifend aliquet felis. Vestibulum nec venenatis libero. Vivamus at ex libero.
-                </p>
+@if (Model.MostRecentAlert != null)
+{
+    <div class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 text-right">
+                    @Model.MostRecentAlert.DateOfCreation
+                </div>
+                <div class="col-sm-6 text-left">
+                    <h3>Titel van nieuws</h3>
+                    <p>
+                       
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+
 <div class="section1">
     <div class="container">
         <div class="row justify-content-center">
@@ -98,12 +98,12 @@
 <div class="section5">
     <div class="container">
         <div class="row justify-content-center">
-                <h1 >Voor wie zijn deze cursussen bedoeld?</h1>
-                <p class="text-center">
-                    We hebben geen indeling gemaakt voor beginners of gevorderden, iedereen kan uit de cursussen halen wat ze nodig hebben. 
-                    Sommige lessen zitten in iedere cursus.
-                    Bekijk ook onze proeflessen via de navigatiebalk.
-                </p>
+            <h1 class="text-center">Voor wie zijn deze cursussen bedoeld?</h1>
+            <p class="text-center">
+                We hebben geen indeling gemaakt voor beginners of gevorderden, iedereen kan uit de cursussen halen wat ze nodig hebben.
+                Sommige lessen zitten in iedere cursus.
+                Bekijk ook onze proeflessen via de navigatiebalk.
+            </p>
         </div>
         <div class="row">
             <div class="col">
@@ -125,9 +125,9 @@
                             uit je hoofd te werken of ontwerpen te maken? Dan leer je in deze cursus precies hoe je dat kunt doen.
                         </p>
                     </div>
-                    </div>
                 </div>
             </div>
+        </div>
         <div class="row">
             <div class="col">
                 <div class="row">
@@ -142,7 +142,7 @@
                         </p>
                     </div>
                 </div>
-                </div>
+            </div>
             <div class="col">
                 <div class="row">
                     <div class="col-3"></div>
@@ -157,8 +157,8 @@
                             dus gewoon voor de lol meedoen kan zeker ook, je krijgt alleen geen certificaat.
                         </p>
                     </div>
-                    </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>

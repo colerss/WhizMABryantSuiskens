@@ -12,14 +12,28 @@
             <a class="nav-link text-light dropdown-toggle" href="#" id="accountDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Account
             </a>
-            <div class="dropdown-menu navbar-custom  " aria-labelledby="accountDropDown">
+            <div class="dropdown-menu navbar-custom dropleft " aria-labelledby="accountDropDown">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profiel</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="AccountCatalogus" asp-action="UserCatalogue">Mijn Lessen</a>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a class="nav-link text-dark dropdown-toggle" href="#" id="accountSubDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Administratie
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="accountSubDropDown">
+                        <a class="nav-link text-dark" asp-controller="CursusWinkel" asp-action="Index">Managen Cursus</a>
+                        <a class="nav-link text-dark" asp-controller="BundelWinkel" asp-action="Index">Managen Bundels</a>
+                        <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Managen Rollen</a>
+                        <a class="nav-link text-dark" asp-controller="Docent" asp-action="Index">Managen Docenten</a>
+                        <a class="nav-link text-dark" asp-controller="AccountCatalogus" asp-action="Index">Managen Accounts</a>
+                        <a class="nav-link text-dark" asp-controller="AlertItems" asp-action="Index">Managen Alerts</a>
+                    </div>
+                  }
                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                     <button type="submit" class="nav-link  btn btn-link navbar-custom text-dark">Logout</button>
-                </form>
+                 </form>
             </div>
-        </li>
+</li>
     }
     else
     {

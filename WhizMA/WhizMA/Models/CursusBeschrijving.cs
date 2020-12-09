@@ -11,6 +11,7 @@ namespace WhizMA.Models
         [Key]
         public int CursusBeschrijvingID { get; set; }
         public string InhoudBeschrijving { get; set; }
+        public string VoorWieBeschrijving { get; set; }
 
         public string CertificaatBeschrijving { get; set; }
 

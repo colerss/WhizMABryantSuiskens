@@ -33,6 +33,7 @@ namespace WhizMA.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Cursus>().ToTable("Cursussen");
+            modelBuilder.Entity<AlertItem>().ToTable("AlertItems");
             modelBuilder.Entity<Les>().ToTable("Lessen");
             modelBuilder.Entity<CursusInhoud>().ToTable("CursusInhoud");
             modelBuilder.Entity<InfoNode>().ToTable("InfoNodes");
@@ -54,5 +55,7 @@ namespace WhizMA.Data
             modelBuilder.Entity<Cursus>().Property(p => p.HuidigePrijs).HasColumnType("decimal(18,2)");
             modelBuilder.Entity<Cursus>().Property(p => p.StandaardPrijs).HasColumnType("decimal(18,2)");
         }
+
+        public DbSet<WhizMA.Models.AlertItem> AlertItem { get; set; }
     }
 }

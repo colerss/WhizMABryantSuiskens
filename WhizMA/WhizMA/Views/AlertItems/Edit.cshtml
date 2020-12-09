@@ -1,0 +1,55 @@
+﻿@model WhizMA.Models.AlertItem
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>AlertItem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AlertId" />
+            <div class="form-group">
+                <label asp-for="AlertTitel" class="control-label"></label>
+                <input asp-for="AlertTitel" class="form-control" />
+                <span asp-validation-for="AlertTitel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InfoText1" class="control-label"></label>
+                <input asp-for="InfoText1" class="form-control" />
+                <span asp-validation-for="InfoText1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InfoText2" class="control-label"></label>
+                <input asp-for="InfoText2" class="form-control" />
+                <span asp-validation-for="InfoText2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfCreation" class="control-label"></label>
+                <input asp-for="DateOfCreation" class="form-control" />
+                <span asp-validation-for="DateOfCreation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfExpiry" class="control-label"></label>
+                <input asp-for="DateOfExpiry" class="form-control" />
+                <span asp-validation-for="DateOfExpiry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

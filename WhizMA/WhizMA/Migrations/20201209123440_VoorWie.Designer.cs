@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhizMA.Data;
 
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    partial class WhizMAContextModelSnapshot : ModelSnapshot
+    [Migration("20201209123440_VoorWie")]
+    partial class VoorWie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,33 +243,6 @@ namespace WhizMA.Migrations
                     b.HasIndex("CursusID");
 
                     b.ToTable("AccountCatalogus");
-                });
-
-            modelBuilder.Entity("WhizMA.Models.AlertItem", b =>
-                {
-                    b.Property<int>("AlertId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AlertTitel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateOfCreation")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateOfExpiry")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InfoText1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InfoText2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AlertId");
-
-                    b.ToTable("AlertItems");
                 });
 
             modelBuilder.Entity("WhizMA.Models.Bundel", b =>
