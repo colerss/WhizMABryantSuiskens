@@ -27,11 +27,30 @@
         , dan zoeken we een alternatieve manier van betalen en zet ik u handmatig in de cursus. Hiervoor moet u wel even een inlog aanmaken, 
         dan kan ik u vinden in het systeem. </p>
         <div class="text-center">
-            <button type="button" class="btn btn-danger">
+            @if (Model.IsLogged)
+            {
+                <text>
+                    @if (Model.IsOwned)
+                    {
+                        <a  class="btn btn-primary" asp-controller="AccountCatalogus" asp-action="Les" asp-route-id="@Model.Cursus.CursusID">
+                           Naar Les
+                            </a>
+                            }
+                            else
+                            {
+                            <text>
+        <form asp-action="Buy">
+            <input type="hidden" asp-for="Cursus.CursusID" value="@Model.Cursus.CursusID" />
+            <input type="hidden" asp-for="IsLogged" value="@Model.IsLogged" />
+            <input type="hidden" asp-for="IsOwned" value="@Model.IsOwned" />
+            <input type="hidden" asp-for="CurrentUser.Id" value="@Model.CurrentUser.Id" />
+
+            <button type="submit" id="button" class="btn btn-danger">
                 Start
+
                 @if (Model.Cursus.StandaardPrijs == Model.Cursus.HuidigePrijs)
                 {
-                    <span class="mainPrice">@Model.Cursus.HuidigePrijs.ToString("N0")</span>
+                    <span class="mainPrice"> €@Model.Cursus.HuidigePrijs.ToString("N0")</span>
                 }
                 else
                 {
@@ -40,8 +59,21 @@
                     </span>
                     <span class="mainPrice">   €@Model.Cursus.HuidigePrijs.ToString("N0")</span>
                 }
-            </button>
-        </div>
+                </button>
+        </form>
+                            </text>
+                            }
+                            </text>
+                        }
+                        else
+                        {
+                            <a class="btn btn-danger" asp-area="Identity" asp-page="/Account/Login">
+                                Log in om te kopen
+                            </a>
+                        }
+
+
+            </div>
     </div>
 </div>
 <div class="sectionBetween">

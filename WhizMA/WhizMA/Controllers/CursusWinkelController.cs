@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WhizMA.Areas.Identity.Data;
 using WhizMA.Data;
 using WhizMA.Models;
 using WhizMA.ViewModels;
 namespace WhizMA.Controllers
 {
+    [Authorize(Policy = "writepolicy")]
     public class CursusWinkelController : Controller
     {
         private readonly WhizMAContext _context;
 
+        
         public CursusWinkelController(WhizMAContext context)
         {
             _context = context;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Catalogus()
         {
             CatalogusCursussenViewModel viewModel = new CatalogusCursussenViewModel();
@@ -29,6 +34,7 @@ namespace WhizMA.Controllers
             ViewData["Docent"] = new SelectList(_context.Docenten, "DocentID", "DocentNaam");
             return View(viewModel);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Cursus(int? id)
         {
             CursusDetailViewModel viewModel = new CursusDetailViewModel();
@@ -51,6 +57,22 @@ namespace WhizMA.Controllers
                 return NotFound();
             }
             viewModel.Cursus = cursus;
+            viewModel.IsLogged = User.Identity.IsAuthenticated;
+            viewModel.CurrentUser = _context.Account.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            if (viewModel.IsLogged)
+            {
+                
+                List<AccountCatalogus> accountCatalogus = await _context.AccountCatalogus
+                .Where(c => c.Account.UserName == User.Identity.Name)
+                .Include(c => c.Cursus)
+                .ToListAsync();
+
+                viewModel.IsOwned = (accountCatalogus.Where(x => x.Cursus == viewModel.Cursus).Count() > 0);
+            }
+            else
+            {
+                viewModel.IsOwned = false;
+            }
             return View(viewModel);
         }
         // GET: CursusWinkel
@@ -58,6 +80,27 @@ namespace WhizMA.Controllers
         {
             var whizMAContext = _context.Cursussen.Include(c => c.CursusBeschrijving).Include(c => c.Docent);
             return View(await whizMAContext.ToListAsync());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Buy(CursusDetailViewModel viewModel)
+        {
+            if (viewModel.IsLogged)
+            {
+
+                AccountCatalogus newItem = new AccountCatalogus
+                {
+                    
+                    CursusID = viewModel.Cursus.CursusID,
+                    Voortgang = 1,
+                    AccountID = viewModel.CurrentUser.Id,
+                    VerloopTijd = DateTime.Now.AddMonths(viewModel.Cursus.BeschikbaarheidInMaanden)
+                };
+                _context.Add(newItem);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Catalogus");
+            }
+            throw new Exception();
         }
 
         // GET: CursusWinkel/Details/5

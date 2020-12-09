@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WhizMA.Areas.Identity.Data;
 using WhizMA.Data;
 using WhizMA.Models;
 using WhizMA.ViewModels;
 
 namespace WhizMA.Controllers
 {
+    [Authorize(Policy = "writepolicy")]
     public class BundelWinkelController : Controller
     {
         private readonly WhizMAContext _context;
@@ -19,7 +22,7 @@ namespace WhizMA.Controllers
         {
             _context = context;
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Catalogus()
         {
             CatalogusBundelViewModel viewModel = new CatalogusBundelViewModel();
@@ -53,6 +56,7 @@ namespace WhizMA.Controllers
 
             return View(bundel);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Bundel(int? id)
         {
             BundelDetailsViewModel viewModel = new BundelDetailsViewModel();
@@ -106,6 +110,35 @@ namespace WhizMA.Controllers
             }
             return View(viewModel);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToAccount(BundelDetailsViewModel viewModel)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                UserAccount currentUser = _context.Account.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+                if (ModelState.IsValid)
+                {
+                    foreach (BundelInhoud cursus in viewModel.Bundel.BundelInhoud)
+                    {
+                        AccountCatalogus newItem = new AccountCatalogus
+                        {
+                            AccountID = currentUser.Id,
+                            CursusID = cursus.CursusID,
+                            Voortgang = 0,
+                            VerloopTijd = DateTime.Now.AddMonths(cursus.Cursus.BeschikbaarheidInMaanden)
+                        };
+                        _context.Add(newItem);
+                    }
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+           
+            return View(viewModel);
+        }
+
 
         // GET: Bundels/Edit/5
         public async Task<IActionResult> Edit(int? id)

@@ -9,9 +9,11 @@ using WhizMA.Data;
 using WhizMA.Models;
 using Microsoft.AspNetCore.Identity;
 using WhizMA.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WhizMA.Controllers
 {
+    [Authorize(Policy = "writepolicy")]
     public class AccountCatalogusController : Controller
     {
         private readonly WhizMAContext _context;
@@ -22,11 +24,13 @@ namespace WhizMA.Controllers
         }
 
         // GET: AccountCatalogus
+     
         public async Task<IActionResult> Index()
         {
             var whizMAContext = _context.AccountCatalogus.Include(a => a.Account).Include(a => a.Cursus);
             return View(await whizMAContext.ToListAsync());
         }
+        [Authorize(Policy = "readpolicy")]
         public async Task<IActionResult> UserCatalogue()
         {
            AccountCatalogusViewModel viewModel = new AccountCatalogusViewModel();
@@ -40,6 +44,7 @@ namespace WhizMA.Controllers
             ViewData["Docent"] = new SelectList(_context.Docenten, "DocentID", "DocentNaam");
             return View(viewModel);
         }
+        [Authorize(Policy = "readpolicy")]
         public async Task<IActionResult> Les(int? id)
         {
             CursusDetailViewModel viewModel = new CursusDetailViewModel();
@@ -65,6 +70,7 @@ namespace WhizMA.Controllers
             return View(viewModel);
         }
         // GET: AccountCatalogus/Details/5
+      
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -85,6 +91,7 @@ namespace WhizMA.Controllers
         }
 
         // GET: AccountCatalogus/Create
+  
         public IActionResult Create()
         {
             ViewData["AccountID"] = new SelectList(_context.Account, "Id", "Id");
@@ -109,7 +116,7 @@ namespace WhizMA.Controllers
             ViewData["CursusID"] = new SelectList(_context.Cursussen, "CursusID", "Afbeelding", accountCatalogus.CursusID);
             return View(accountCatalogus);
         }
-
+       
         // GET: AccountCatalogus/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -164,7 +171,6 @@ namespace WhizMA.Controllers
             ViewData["CursusID"] = new SelectList(_context.Cursussen, "CursusID", "Afbeelding", accountCatalogus.CursusID);
             return View(accountCatalogus);
         }
-
         // GET: AccountCatalogus/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
