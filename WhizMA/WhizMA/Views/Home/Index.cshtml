@@ -42,12 +42,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 text-right">
-                    @Model.MostRecentAlert.DateOfCreation
+                    @Model.MostRecentAlert.DateOfCreation.ToLongDateString()
                 </div>
                 <div class="col-sm-6 text-left">
-                    <h3>Titel van nieuws</h3>
+                    <h3>@Model.MostRecentAlert.AlertTitel</h3>
                     <p>
-                       
+                        @Model.MostRecentAlert.InfoText1
+                    </p>
+                    <p>
+                        @Model.MostRecentAlert.InfoText2
                     </p>
                 </div>
             </div>
@@ -65,25 +68,27 @@
         <div class="row">
             <div class="card-deck">
                 <div class="card border-dark">
-                    <img class="card-img-top" src="http://placehold.it/400x300" alt="Card image cap">
+                    <img class="card-img-top" src="@Model.Cursussen[0].Afbeelding" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <h5 class="card-title">@Model.Cursussen[0].Naam</h5>
+                        <p class="card-text">@Model.Cursussen[0].CursusBeschrijving.InhoudBeschrijving</p>
 
                     </div>
                 </div>
                 <div class="card border-dark">
-                    <img class="card-img-top" src="http://placehold.it/400x300" alt="Card image cap">
+                    <img class="card-img-top" src="@Model.Cursussen[1].Afbeelding" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title">@Model.Cursussen[1].Naam</h5>
+                        <p class="card-text">@Model.Cursussen[1].CursusBeschrijving.InhoudBeschrijving</p>
+
                     </div>
                 </div>
                 <div class="card border-dark">
-                    <img class="card-img-top" src="http://placehold.it/400x300" alt="Card image cap">
+                    <img class="card-img-top" src="@Model.Cursussen[2].Afbeelding" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <h5 class="card-title">@Model.Cursussen[2].Naam</h5>
+                        <p class="card-text">@Model.Cursussen[2].CursusBeschrijving.InhoudBeschrijving</p>
+
                     </div>
                 </div>
             </div>
