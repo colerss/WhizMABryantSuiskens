@@ -20,6 +20,6 @@ namespace WhizMA.Models
         public int BundelBeschrijvingID { get; set; }
         public BundelBeschrijving BundelBeschrijving { get; set; }
 
-        public ICollection<BundelInhoud> BundelInhoud { get; set; }
+        public List<BundelInhoud> BundelInhoud { get; set; }
     }
 }

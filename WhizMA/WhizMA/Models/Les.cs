@@ -14,7 +14,7 @@ namespace WhizMA.Models
         public string Naam { get; set; }
 
 
-        public ICollection<CursusInhoud> CursusInhouden{ get; set; }
+        public List<CursusInhoud> CursusInhouden{ get; set; }
         public ICollection<LesStap> LesStappen { get; set; }
     }
 }

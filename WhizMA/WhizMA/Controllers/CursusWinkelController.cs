@@ -130,8 +130,10 @@ namespace WhizMA.Controllers
             CursusCreateViewModel viewModel = new CursusCreateViewModel();
             viewModel.Cursus = new Cursus();
             viewModel.CursusBeschrijving = new CursusBeschrijving();
+            viewModel.LessenLijst = new SelectList(_context.Lessen, "LesID", "Naam");
+            viewModel.GeselecteerdeLessen = new List<int>();
             ViewData["DocentID"] = new SelectList(_context.Docenten, "DocentID", "DocentNaam");
-            return View();
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Search(CatalogusCursussenViewModel viewModel)
@@ -172,8 +174,28 @@ namespace WhizMA.Controllers
                 if (saveCheck != 0)
                 {
                     viewModel.Cursus.CursusBeschrijvingID = viewModel.CursusBeschrijving.CursusBeschrijvingID;
-                    _context.Add(viewModel.Cursus);
 
+
+                    List<CursusInhoud> cursusInhoud = new List<CursusInhoud>();
+                    int index = 1;
+                    foreach (int lesID in viewModel.GeselecteerdeLessen)
+                    {
+                        cursusInhoud.Add(new CursusInhoud
+                        {
+                            LesID = lesID,
+                            CursusID = viewModel.Cursus.CursusID,
+                            LesIntervalWeken = 1,
+                            Positie = index
+
+                        });
+                        index++;
+                    }
+                    _context.Add(viewModel.Cursus);
+                    await _context.SaveChangesAsync();
+                    Cursus cursus = await _context.Cursussen.Include(o => o.CursusInhoud)
+                    .SingleOrDefaultAsync(x => x.CursusID == viewModel.Cursus.CursusID);
+                    cursus.CursusInhoud.AddRange(cursusInhoud);
+                    _context.Update(cursus);
 
 
                     await _context.SaveChangesAsync();

@@ -101,7 +101,9 @@ namespace WhizMA.Controllers
             BundelCreateViewModel viewModel = new BundelCreateViewModel();
             viewModel.Bundel = new Bundel();
             viewModel.BundelBeschrijving = new BundelBeschrijving();
-            return View();
+            viewModel.CursusLijst = new SelectList(_context.Cursussen, "CursusID", "Naam");
+            viewModel.GeselecteerdeCursussen = new List<int>();
+            return View(viewModel);
         }
 
         // POST: Bundels/Create
@@ -118,8 +120,22 @@ namespace WhizMA.Controllers
                 if (saveCheck != 0)
                 {
                     viewModel.Bundel.BundelBeschrijvingID = viewModel.BundelBeschrijving.BundelBeschrijvingID;
-                    _context.Add(viewModel.Bundel);
 
+                    List<BundelInhoud> bundelInhoud = new List<BundelInhoud>();
+                    foreach (int cursusID in viewModel.GeselecteerdeCursussen)
+                    {
+                        bundelInhoud.Add(new BundelInhoud
+                        {
+                            CursusID = cursusID,
+                            BundelID = viewModel.Bundel.BundelID
+                        });
+                    }
+                    _context.Add(viewModel.Bundel);
+                    await _context.SaveChangesAsync();
+                    Bundel bundel = await _context.Bundels.Include(o => o.BundelInhoud)
+                    .SingleOrDefaultAsync(x => x.BundelID == viewModel.Bundel.BundelID);
+                    bundel.BundelInhoud.AddRange(bundelInhoud);
+                    _context.Update(bundel);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }

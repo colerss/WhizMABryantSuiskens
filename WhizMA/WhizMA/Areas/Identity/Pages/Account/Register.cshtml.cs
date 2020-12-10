@@ -63,6 +63,11 @@ namespace WhizMA.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Naam")]
+            public string UserName { get; set; }
             public string Name { get; set; }
         }
 
@@ -82,7 +87,7 @@ namespace WhizMA.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new UserAccount { UserName = Input.Email, Email = Input.Email };
+                var user = new UserAccount { UserName = Input.UserName, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

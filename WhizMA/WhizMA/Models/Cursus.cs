@@ -26,9 +26,9 @@ namespace WhizMA.Models
 
         public CursusBeschrijving CursusBeschrijving { get; set; }
         public Docent Docent { get; set; }
-        public ICollection<CursusInhoud> CursusInhoud { get; set; }
+        public List<CursusInhoud> CursusInhoud { get; set; }
        
-        public ICollection<BundelInhoud> BundelInhoud { get; set; }
+        public List<BundelInhoud> BundelInhoud { get; set; }
         public ICollection<AccountCatalogus> AccountCatalogus { get; set; }
     }
 }

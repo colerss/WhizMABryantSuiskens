@@ -34,6 +34,10 @@
                         <textarea asp-for="CursusBeschrijving.InhoudBeschrijving" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
+                        <label asp-for="CursusBeschrijving.VoorWieBeschrijving" class="control-label"></label>
+                        <textarea asp-for="CursusBeschrijving.VoorWieBeschrijving" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="CursusBeschrijving.CertificaatBeschrijving" class="control-label"></label>
                         <textarea asp-for="CursusBeschrijving.CertificaatBeschrijving" class="form-control"></textarea>
                     </div>
@@ -55,6 +59,9 @@
                     <div class="form-group">
                         <label asp-for="Cursus.DocentID" class="control-label"></label>
                         <select asp-for="Cursus.DocentID" class="form-control" asp-items="ViewBag.DocentID"></select>
+                    </div>
+                    <div class="form-group">
+                        <select asp-for="GeselecteerdeLessen" asp-items="Model.LessenLijst"></select>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-primary" />
