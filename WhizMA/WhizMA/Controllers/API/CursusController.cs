@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WhizMA.Data;
+using WhizMA.Data.UnitOfWork;
 using WhizMA.Models;
 
 namespace WhizMA.Controllers.API
@@ -16,24 +17,24 @@ namespace WhizMA.Controllers.API
     [ApiController]
     public class CursusController : ControllerBase
     {
-        private readonly WhizMAContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CursusController(WhizMAContext context)
+        public CursusController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/Cursus
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cursus>>> GetCursussen()
         {
-            return await _context.Cursussen.Include(x => x.CursusInhoud).Include(r => r.CursusBeschrijving).ToListAsync();
+            return await _unitOfWork.RepoCursus.GetAll(x => x.CursusInhoud, r => r.CursusBeschrijving).ToListAsync();
         }
         // GET: api/Cursus/Afbeeldingen
         [HttpGet("Afbeeldingen")]
         public async Task<ActionResult<IEnumerable<string>>> GetAfbeeldingen()
         {
-            return await _context.Cursussen.Select(x => x.Afbeelding).ToListAsync();
+            return await _unitOfWork.RepoCursus.GetAll().Select(x => x.Afbeelding).ToListAsync();
         }
 
         // GET: api/Cursus/5
@@ -41,7 +42,7 @@ namespace WhizMA.Controllers.API
         [HttpGet("{id}")]
         public async Task<ActionResult<Cursus>> GetCursus(int id)
         {
-            var cursus = await _context.Cursussen.FindAsync(id);
+            var cursus = await _unitOfWork.RepoCursus.GetById(id);
 
             if (cursus == null)
             {
@@ -63,11 +64,11 @@ namespace WhizMA.Controllers.API
                 return BadRequest();
             }
 
-            _context.Entry(cursus).State = EntityState.Modified;
+            _unitOfWork.RepoCursus.Update(cursus);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _unitOfWork.Save();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -91,8 +92,8 @@ namespace WhizMA.Controllers.API
         [HttpPost]
         public async Task<ActionResult<Cursus>> PostCursus(Cursus cursus)
         {
-            _context.Cursussen.Add(cursus);
-            await _context.SaveChangesAsync();
+            _unitOfWork.RepoCursus.Create(cursus);
+            await _unitOfWork.Save();
 
             return CreatedAtAction("GetCursus", new { id = cursus.CursusID }, cursus);
         }
@@ -102,21 +103,21 @@ namespace WhizMA.Controllers.API
         [HttpDelete("{id}")]
         public async Task<ActionResult<Cursus>> DeleteCursus(int id)
         {
-            var cursus = await _context.Cursussen.FindAsync(id);
+            var cursus = await _unitOfWork.RepoCursus.GetById(id);
             if (cursus == null)
             {
                 return NotFound();
             }
 
-            _context.Cursussen.Remove(cursus);
-            await _context.SaveChangesAsync();
+            _unitOfWork.RepoCursus.Delete(cursus);
+            await _unitOfWork.Save();
 
             return cursus;
         }
 
         private bool CursusExists(int id)
         {
-            return _context.Cursussen.Any(e => e.CursusID == id);
+            return _unitOfWork.RepoCursus.GetAll().Any(e => e.CursusID == id);
         }
     }
 }

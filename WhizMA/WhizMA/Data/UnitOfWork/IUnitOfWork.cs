@@ -9,7 +9,7 @@ namespace WhizMA.Data.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        IGenericRepository<Docent> RepoDocent { get; }
+        IGenericRepository<Cursus> RepoCursus { get; }
         Task Save();
     }
 }

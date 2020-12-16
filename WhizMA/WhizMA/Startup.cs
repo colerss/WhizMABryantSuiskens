@@ -17,6 +17,7 @@ using WhizMA.Helper;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using WhizMA.Data.UnitOfWork;
 
 namespace WhizMA
 {
@@ -43,7 +44,7 @@ namespace WhizMA
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddRazorPages();
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAuthorization(options => {
                 options.AddPolicy("readpolicy",
                     builder => builder.RequireRole("Administrator", "Manager", "User"));

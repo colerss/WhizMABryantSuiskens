@@ -10,7 +10,7 @@ namespace WhizMA.Data.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly WhizMAContext _context;
-        private IGenericRepository<Docent> repoDocent;
+        private IGenericRepository<Cursus> repoCursus;
 
 
         public UnitOfWork(WhizMAContext context)
@@ -18,15 +18,15 @@ namespace WhizMA.Data.UnitOfWork
             _context = context;
         }
 
-        public IGenericRepository<Docent> RepoDocent
+        public IGenericRepository<Cursus> RepoCursus
         {
             get
             {
-                if (this.repoDocent == null)
+                if (this.repoCursus == null)
                 {
-                    this.repoDocent = new GenericRepository<Docent>(_context);
+                    this.repoCursus = new GenericRepository<Cursus>(_context);
                 }
-                return repoDocent;
+                return repoCursus;
             }
         }
 

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace WhizMA.Data.Repository
@@ -39,5 +41,32 @@ namespace WhizMA.Data.Repository
             _context.Set<TEntity>().Remove(entity);
         }
 
+        public IQueryable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes)
+        {
+            return GetAll(null, includes);
+        }
+
+        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> voorwaarden)
+        {
+            return GetAll(voorwaarden, null);
+        }
+
+        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> voorwaarden, params Expression<Func<TEntity, object>>[] includes)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+            if (includes != null)
+            {
+                foreach (var item in includes)
+                {
+                    query = query.Include(item);
+                }
+            }
+            if (voorwaarden != null)
+            {
+                query = query.Where(voorwaarden);
+            }
+            IQueryable<TEntity> query2 = query;
+            return query2;
+        }
     }
 }
