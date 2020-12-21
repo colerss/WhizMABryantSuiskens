@@ -102,6 +102,17 @@ namespace WhizMA
                         ValidateAudience = false
                     };
                 });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3000")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
+
 
             services.AddSwaggerGen(c => { 
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Whiz API", Version = "v1"});
@@ -151,7 +162,7 @@ namespace WhizMA
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCors("CorsPolicy");
             app.UseRouting();
 
             app.UseAuthentication();

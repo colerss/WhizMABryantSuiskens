@@ -55,6 +55,7 @@ namespace WhizMA.Data
             modelBuilder.Entity<Cursus>().Property(p => p.HuidigePrijs).HasColumnType("decimal(18,2)");
             modelBuilder.Entity<Cursus>().Property(p => p.StandaardPrijs).HasColumnType("decimal(18,2)");
         }
+        public DbSet<WhizMA.Models.CursusBeschrijving> CursusBeschrijving { get; set; }
 
        
     }
