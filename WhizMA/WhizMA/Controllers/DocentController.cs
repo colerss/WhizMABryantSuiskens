@@ -56,7 +56,7 @@ namespace WhizMA.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DocentID,DocentNaam")] Docent docent)
+        public async Task<IActionResult> Create([Bind("DocentID,DocentNaam,DocentTitel,DocentAfbeeldingURL,DocentFB,DocentIG,DocentPin,DocentBio")] Docent docent)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace WhizMA.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DocentID,DocentNaam")] Docent docent)
+        public async Task<IActionResult> Edit(int id, [Bind("DocentID,DocentNaam,DocentTitel,DocentAfbeeldingURL,DocentFB,DocentIG,DocentPin,DocentBio")] Docent docent)
         {
             if (id != docent.DocentID)
             {

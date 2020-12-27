@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WhizMA.Data;
 
 namespace WhizMA.Migrations
 {
     [DbContext(typeof(WhizMAContext))]
-    partial class WhizMAContextModelSnapshot : ModelSnapshot
+    [Migration("20201227173938_reactCompatibility2")]
+    partial class reactCompatibility2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -296,7 +298,8 @@ namespace WhizMA.Migrations
 
                     b.HasKey("BundelID");
 
-                    b.HasIndex("BundelBeschrijvingID");
+                    b.HasIndex("BundelBeschrijvingID")
+                        .IsUnique();
 
                     b.ToTable("Bundels");
                 });
@@ -631,8 +634,8 @@ namespace WhizMA.Migrations
             modelBuilder.Entity("WhizMA.Models.Bundel", b =>
                 {
                     b.HasOne("WhizMA.Models.BundelBeschrijving", "BundelBeschrijving")
-                        .WithMany("Bundels")
-                        .HasForeignKey("BundelBeschrijvingID")
+                        .WithOne("Bundel")
+                        .HasForeignKey("WhizMA.Models.Bundel", "BundelBeschrijvingID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

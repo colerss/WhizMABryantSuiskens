@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Create</h1>
@@ -16,6 +17,36 @@
                 <label asp-for="DocentNaam" class="control-label"></label>
                 <input asp-for="DocentNaam" class="form-control" />
                 <span asp-validation-for="DocentNaam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocentTitel" class="control-label"></label>
+                <input asp-for="DocentTitel" class="form-control" />
+                <span asp-validation-for="DocentTitel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocentAfbeeldingURL" class="control-label"></label>
+                <input asp-for="DocentAfbeeldingURL" class="form-control" />
+                <span asp-validation-for="DocentAfbeeldingURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocentFB" class="control-label"></label>
+                <input asp-for="DocentFB" class="form-control" />
+                <span asp-validation-for="DocentFB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocentIG" class="control-label"></label>
+                <input asp-for="DocentIG" class="form-control" />
+                <span asp-validation-for="DocentIG" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocentPin" class="control-label"></label>
+                <input asp-for="DocentPin" class="form-control" />
+                <span asp-validation-for="DocentPin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocentBio" class="control-label"></label>
+                <input asp-for="DocentBio" class="form-control" />
+                <span asp-validation-for="DocentBio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Delete</h1>
@@ -16,6 +17,42 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DocentNaam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DocentTitel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocentTitel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DocentAfbeeldingURL)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocentAfbeeldingURL)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DocentFB)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocentFB)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DocentIG)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocentIG)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DocentPin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocentPin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DocentBio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocentBio)
         </dd>
     </dl>
     

@@ -21,6 +21,6 @@ namespace WhizMA.Models
         public string DocentPin { get; set; }
         public string DocentBio { get; set; }
 
-        public ICollection<Cursus> Cursussen { get; set; }
+        public List<Cursus> Cursussen { get; set; }
     }
 }

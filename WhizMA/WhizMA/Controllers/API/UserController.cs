@@ -39,7 +39,7 @@ namespace WhizMA.Controllers.API
 
    
 
-        [HttpPost("Authenticate")]
+        [HttpPost("authenticate")]
         public async Task<object> Authenticate([FromBody] ApiUser apiUser)
         {
             Microsoft.AspNetCore.Identity.SignInResult signInResult = await _signInManager.PasswordSignInAsync(apiUser.Username, apiUser.Password, true, false);
@@ -48,16 +48,16 @@ namespace WhizMA.Controllers.API
                 UserAccount userAccount = _userManager.Users.SingleOrDefault(r => r.Email == apiUser.Username);
                 apiUser.Token =  GenerateJwtToken(apiUser.Username, userAccount).ToString();
 
-                return apiUser;
+                return Ok(apiUser);
             }
 
-            return BadRequest(new {message ="Username or Password incorrect"});
+            return Unauthorized();
         }
 
         private string GenerateJwtToken(string email, UserAccount userAccount)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

@@ -15,7 +15,7 @@ namespace WhizMA.Models
 
         public string CertificaatBeschrijving { get; set; }
 
-        public Cursus Cursus { get; set; }
+        public List<Cursus> Cursussen { get; set; }
         public ICollection<InfoNode> InfoNodes { get; set; }
     }
 }
