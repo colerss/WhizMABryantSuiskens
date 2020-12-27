@@ -38,7 +38,6 @@ namespace WhizMA.Controllers.API
         }
 
         // GET: api/Cursus/5
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{id}")]
         public async Task<ActionResult<Cursus>> GetCursus(int id)
         {
