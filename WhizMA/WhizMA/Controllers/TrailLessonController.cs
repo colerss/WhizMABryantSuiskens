@@ -14,7 +14,7 @@ namespace WhizMA.Controllers
         }
         public IActionResult Strokes()
         {
-            ViewData["vidUrl"] = "https://www.youtube.com/embed/9S-3Uk5-Zsg";
+            ViewData["vidUrl"] = "https://www.youtube.com/embed/3LrnR5jHAzY";
             return View();
         }
     }
